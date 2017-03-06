@@ -55,11 +55,14 @@ public class QuickStartView extends BaseFragmentView {
 			public void onPositionChanged(
 				Slider view, boolean fromUser, float oldPos, float newPos, int oldValue,
 				int newValue) {
+				timerIsRunning = false;
+				timerIsPaused = false;
 				float percentPosition = newValue / 100F;
 				TIMER_LENGTH = (int) (percentPosition * MAX_VALUE_IN_SECONDS);
 				float progress = (MAX_VALUE_IN_SECONDS - TIMER_LENGTH) / MAX_VALUE_IN_SECONDS_FLOAT;
 				mTimerView.drawProgress(progress, false);
 				duration.setText(String.valueOf(TIMER_LENGTH));
+				paintButtonBlue(timerIsPaused);
 			}
 		});
 		timerStartButton = (Button) view.findViewById(R.id.quick_start_btn_timer_start);
@@ -122,11 +125,15 @@ public class QuickStartView extends BaseFragmentView {
 		timerIsRunning = false;
 		timerIsPaused = true;
 		mTimerView.pause();
-		paintButtonBlue();
+		paintButtonBlue(timerIsPaused);
 	}
 	
-	void paintButtonBlue() {
-		timerStartButton.setText(R.string.resume);
+	void paintButtonBlue(boolean timerIsPaused) {
+		if (timerIsPaused) {
+			timerStartButton.setText(R.string.resume);
+		} else {
+			timerStartButton.setText(R.string.start);
+		}
 		timerStartButton.setBackgroundTintList(ColorStateList.valueOf(
 			viewContextInject(Context.class).getResources()
 				.getColor(R.color.colorAccent)));
@@ -139,6 +146,19 @@ public class QuickStartView extends BaseFragmentView {
 				.getColor(R.color.errorColor)));
 	}
 	
+	void updateTimerWithVoiceInput(int numericValue) {
+		if (numericValue > MAX_VALUE_IN_SECONDS) {
+			viewListener.onVoiceInputExceedsLimit();
+		} else {
+			TIMER_LENGTH = numericValue;
+			float progress = (MAX_VALUE_IN_SECONDS - TIMER_LENGTH) / MAX_VALUE_IN_SECONDS_FLOAT;
+			float percentValue = (TIMER_LENGTH / MAX_VALUE_IN_SECONDS_FLOAT) * 100;
+			slider.setValue(percentValue, true);
+			mTimerView.drawProgress(progress, false);
+			duration.setText(String.valueOf(TIMER_LENGTH));
+		}
+	}
+	
 	public interface ViewListener {
 		
 		void onTimerStart();
@@ -148,6 +168,8 @@ public class QuickStartView extends BaseFragmentView {
 		void onTimerFinished();
 		
 		void onPromptVoiceInput();
+		
+		void onVoiceInputExceedsLimit();
 	}
 	
 }

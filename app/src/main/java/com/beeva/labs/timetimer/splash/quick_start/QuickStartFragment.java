@@ -60,6 +60,12 @@ public class QuickStartFragment extends BaseFragment<QuickStartView, BaseInterac
 				promptSpeechInput();
 			}
 			
+			@Override
+			public void onVoiceInputExceedsLimit() {
+				ToastUtils.showShort(viewContextInject(Context.class), "Value should not exceed "
+																	   + "maximum value (60)");
+			}
+			
 		});
 	}
 
@@ -88,11 +94,11 @@ public class QuickStartFragment extends BaseFragment<QuickStartView, BaseInterac
 						RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 		intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-						"Say a number");
+						getString(R.string.say_a_number));
 		try {
 			startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
 		} catch (ActivityNotFoundException a) {
-			ToastUtils.showShort(viewContextInject(Context.class), "Voice input unsupported");
+			ToastUtils.showShort(viewContextInject(Context.class), getString(R.string.voice_input_not_supported));
 		}
 	}
 
@@ -109,7 +115,18 @@ public class QuickStartFragment extends BaseFragment<QuickStartView, BaseInterac
 
 					ArrayList<String> result = data
 						.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-					ToastUtils.show(viewContextInject(Context.class), "You said: " + result.get(0));
+					
+					//ToastUtils.show(viewContextInject(Context.class), "You said: " + result.get(0));
+					String number = result.get(0);
+					try {
+						int numericValue = Integer.parseInt(number);
+						if (fragmentView != null) {
+							fragmentView.updateTimerWithVoiceInput(numericValue);
+						}
+					} catch (NumberFormatException e) {
+						ToastUtils.show(viewContextInject(Context.class), "You said: " + result
+							.get(0) + ". Please provide a single number.");
+					}
 				}
 				break;
 			}

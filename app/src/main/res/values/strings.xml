@@ -309,4 +309,8 @@
 	<string name="nice_job">Nice job</string>
 	<string name="next_time_better">Next time will be better</string>
 	<string name="how_long">What\'s the total duration (in minutes)?</string>
+	<string name="say_a_number">Say a number</string>
+	<string name="voice_input_not_supported">Voice input unsupported</string>
+	<string name="new_meeting">New meeting</string>
+	<string name="quit">Quit</string>
 </resources>

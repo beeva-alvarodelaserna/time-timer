@@ -62,14 +62,14 @@
 				android:id="@+id/end_session_button_new"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:text="New meeting"
+				android:text="@string/new_meeting"
 				android:textColor="@android:color/white"
 				android:textStyle="bold"/>
 			<Button
 				android:id="@+id/end_session_button_quit"
 				android:layout_width="match_parent"
 				android:layout_height="wrap_content"
-				android:text="Quit"
+				android:text="@string/quit"
 				android:textColor="@android:color/white"
 				android:backgroundTint="@color/errorColor"
 				android:textStyle="bold"/>
