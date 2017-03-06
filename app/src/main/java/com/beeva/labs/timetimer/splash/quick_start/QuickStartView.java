@@ -18,7 +18,7 @@ public class QuickStartView extends BaseFragmentView {
 	
 	private final ViewListener viewListener;
 	
-	private int TIMER_LENGTH = 15;
+	private int TIMER_LENGTH;
 	private final float MAX_VALUE_IN_MINUTES_FLOAT = 3600F;
 	private final float MAX_VALUE_IN_SECONDS_FLOAT = 60F;
 	private final int MAX_VALUE_IN_MINUTES = 3600;
@@ -55,8 +55,11 @@ public class QuickStartView extends BaseFragmentView {
 			public void onPositionChanged(
 				Slider view, boolean fromUser, float oldPos, float newPos, int oldValue,
 				int newValue) {
+				mTimerView.pause();
 				timerIsRunning = false;
 				timerIsPaused = false;
+				mTimerView.setCircleColor(viewContextInject(Context.class).getResources()
+											  .getColor(R.color.colorAccent));
 				float percentPosition = newValue / 100F;
 				TIMER_LENGTH = (int) (percentPosition * MAX_VALUE_IN_SECONDS);
 				float progress = (MAX_VALUE_IN_SECONDS - TIMER_LENGTH) / MAX_VALUE_IN_SECONDS_FLOAT;
@@ -103,21 +106,24 @@ public class QuickStartView extends BaseFragmentView {
 	}
 	
 	void startTimer() {
-		if (timerIsPaused) {
-			timerIsRunning = true;
-			timerIsPaused = false;
-			paintButtonYellow();
-			mTimerView.setCircleColor(viewContextInject(Context.class).getResources()
-										  .getColor(R.color.errorColor));
-			mTimerView.resume();
-		} else {
-			timerIsRunning = true;
-			timerIsPaused = false;
-			paintButtonYellow();
-			mTimerView.setCircleColor(viewContextInject(Context.class).getResources()
-										  .getColor(R.color.errorColor));
-			//mTimerView.start(TIMER_LENGTH * 60, viewListener);
-			mTimerView.startInSeconds(TIMER_LENGTH, viewListener);
+		if (TIMER_LENGTH != 0) {
+			if (timerIsPaused) {
+				timerIsRunning = true;
+				timerIsPaused = false;
+				paintButtonYellow();
+				mTimerView.setCircleColor(viewContextInject(Context.class).getResources()
+											  .getColor(R.color.errorColor));
+				mTimerView.resume();
+			} else {
+				timerIsRunning = true;
+				timerIsPaused = false;
+				paintButtonYellow();
+				mTimerView.setCircleColor(viewContextInject(Context.class).getResources()
+											  .getColor(R.color.errorColor));
+				//mTimerView.start(TIMER_LENGTH * 60, viewListener);
+				mTimerView.startInSeconds(TIMER_LENGTH, viewListener);
+				
+			}
 		}
 	}
 	
