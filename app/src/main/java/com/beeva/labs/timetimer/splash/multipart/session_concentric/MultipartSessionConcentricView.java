@@ -51,7 +51,7 @@ public class MultipartSessionConcentricView extends BaseFragmentView {
 		title.setTextSize(20f);
 		int titleId = View.generateViewId();
 		title.setId(titleId);
-		title.setText("Press center to start");
+		title.setText(R.string.center_to_start);
 		title.setLayoutParams(lp);
 		container.addView(title);
 		ImageView backgroundImage = new ImageView(viewContextInject(Context.class));
@@ -111,7 +111,7 @@ public class MultipartSessionConcentricView extends BaseFragmentView {
 		//timerView.start(position, value * 60, viewListener);
 		timerView.startInSeconds(position, value, viewListener);
 		isRunning = true;
-		sessionString = String.format("Session %s is running.\nPress center to pause.",
+		sessionString = String.format(viewContextInject(Context.class).getString(R.string.session_running),
 									  step.name);
 		styledString = new SpannableString(sessionString);
 		styledString.setSpan(new StyleSpan(Typeface.BOLD), 8, 8 + step.name.length(), 0);
@@ -128,7 +128,7 @@ public class MultipartSessionConcentricView extends BaseFragmentView {
 		timerView.pause();
 		isRunning = false;
 		isPaused = true;
-		title.setText("Paused.\nPress center to continue.");
+		title.setText(R.string.paused);
 	}
 	
 	void resumeTimer(int position) {

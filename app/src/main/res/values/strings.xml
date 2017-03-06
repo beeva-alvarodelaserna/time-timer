@@ -313,4 +313,7 @@
 	<string name="voice_input_not_supported">Voice input unsupported</string>
 	<string name="new_meeting">New meeting</string>
 	<string name="quit">Quit</string>
+	<string name="session_running">Session %s is running. Press center to pause.</string>
+	<string name="paused">Paused. Press center to continue.</string>
+	<string name="center_to_start">Press center to start</string>
 </resources>

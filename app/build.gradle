@@ -8,7 +8,7 @@ repositories {
 }
 
 def code = 1
-def name = "v0.2"
+def name = "v0.1"
 
 android {
 

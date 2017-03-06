@@ -1,6 +1,7 @@
 package com.beeva.labs.timetimer.splash.multipart.setup.duration_and_name_of_steps;
 
 import android.os.Bundle;
+import com.beeva.labs.timetimer.splash.multipart.session.MultipartSessionFragment;
 import com.beeva.labs.timetimer.splash.multipart.session_concentric.MultipartSessionConcentricFragment;
 import com.beeva.labs.timetimer.support.base.ActivityNavigator;
 import com.beeva.labs.timetimer.support.base.BaseFragment;
@@ -60,11 +61,11 @@ public class MultipartSetupDurationAndNameOfStepsFragment extends BaseFragment<M
 
 			@Override
 			public void onFinish() {
-				//MultipartSessionFragment sessionFragment = MultipartSessionFragment.newInstance(steps);
-				//viewContextInject(ActivityNavigator.class).navigate(sessionFragment);
-				MultipartSessionConcentricFragment sessionFragment = MultipartSessionConcentricFragment.newInstance
-					(steps);
+				MultipartSessionFragment sessionFragment = MultipartSessionFragment.newInstance(steps);
 				viewContextInject(ActivityNavigator.class).navigate(sessionFragment);
+				//MultipartSessionConcentricFragment sessionFragment = MultipartSessionConcentricFragment.newInstance
+				//	(steps);
+				//viewContextInject(ActivityNavigator.class).navigate(sessionFragment);
 			}
 
 			@Override

@@ -27,4 +27,7 @@
 	<string name="voice_input_not_supported">Input por voz no disponible</string>
 	<string name="new_meeting">Nueva reunión</string>
 	<string name="quit">Salir</string>
+	<string name="session_running">La parte %s está activa. Pulsa en el centro para parar.</string>
+	<string name="paused">En pausa. Pulsa en el centro para continuar.</string>
+	<string name="center_to_start">Pulsa en el centro para empezar.</string>
 </resources>
