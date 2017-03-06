@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 		  xmlns:tools="http://schemas.android.com/tools"
 		  package="com.bbva.kst.uniqueid">
+	
+	<uses-permission android:name="android.permission.INTERNET"/>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
 	<application
 		android:name="com.beeva.labs.timetimer.TimeTimerApp"
@@ -27,11 +30,7 @@
 				<category android:name="android.intent.category.DEFAULT" />
 			</intent-filter>
 		</activity>
-
-		<meta-data
-			android:name="io.fabric.ApiKey"
-			android:value="1e3b74559393f411845cc37c0c9a43438aef130f"/>
-
+		
 	</application>
 
 </manifest>

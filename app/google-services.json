@@ -1,0 +1,38 @@
+{
+  "project_info": {
+    "project_number": "433041170572",
+    "project_id": "firebase-timetimer"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:433041170572:android:dbbf31860a782e49",
+        "android_client_info": {
+          "package_name": "com.beeva.labs.timetimer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvLFquCGKwfEuyRNOaq4nVXOF3ZTd1CJ4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 2,
+          "analytics_property": {
+            "tracking_id": "UA-93117958-1"
+          }
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
