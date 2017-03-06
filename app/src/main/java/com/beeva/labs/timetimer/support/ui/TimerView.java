@@ -236,7 +236,7 @@ public class TimerView extends View {
 	
 	public void startInSeconds(
 		final int position, int secs,
-		final MultipartSessionConcentricView.ViewListener viewListener) {
+		final MultipartSessionView.ViewListener viewListener) {
 		stop();
 		float progress = (MAX_SECONDS_ONE_MINUTE - secs) / MAX_SECONDS_ONE_MINUTE_FLOAT;
 		drawProgress(progress, false);

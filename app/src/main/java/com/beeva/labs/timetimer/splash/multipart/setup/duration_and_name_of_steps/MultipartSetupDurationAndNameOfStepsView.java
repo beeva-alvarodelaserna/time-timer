@@ -30,6 +30,7 @@ class MultipartSetupDurationAndNameOfStepsView extends BaseFragmentView {
 	private float MAX_VALUE_IN_SECONDS_FLOAT = 60F;
 	private int MAX_VALUE_IN_SECONDS = 60;
 	private final float CIRCLE = 360F; // 360 degrees
+	private int remainingTime;
 	
 	private TextView title;
 	private Button duration;
@@ -46,6 +47,7 @@ class MultipartSetupDurationAndNameOfStepsView extends BaseFragmentView {
 	
 	@Override
 	protected void setUpView(View view) {
+		remainingTime = MAX_VALUE_IN_SECONDS;
 		Display display = ((Activity) viewContextInject(Context.class)).getWindowManager()
 			.getDefaultDisplay();
 		Point size = new Point();

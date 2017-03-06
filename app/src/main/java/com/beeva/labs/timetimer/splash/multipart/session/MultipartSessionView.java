@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import com.bbva.kst.uniqueid.R;
+import com.beeva.labs.timetimer.splash.multipart.session_concentric.MultipartSessionConcentricView;
 import com.beeva.labs.timetimer.support.base.BaseFragmentView;
 import com.beeva.labs.timetimer.support.ui.SessionStep;
 import com.beeva.labs.timetimer.support.ui.TimerView;
@@ -50,7 +51,8 @@ public class MultipartSessionView extends BaseFragmentView {
 		RelativeLayout layout = (RelativeLayout) recyclerView.getChildAt(position);
 		TimerView timerView = (TimerView) layout.getChildAt(0);
 		int value = step.duration;
-		timerView.start(position, value * 60, viewListener);
+		//timerView.start(position, value * 60, viewListener);
+		timerView.startInSeconds(position, value, viewListener);
 	}
 
 	void paintButtonBlue() {
