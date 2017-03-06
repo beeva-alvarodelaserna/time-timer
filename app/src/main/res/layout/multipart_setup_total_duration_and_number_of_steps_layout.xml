@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:orientation="vertical">
+	
+	<TextView
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:gravity="center"
+		android:text="@string/multipart_setup"
+		android:textSize="35sp"
+		android:textStyle="bold" />
+	
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="8"
+		android:orientation="vertical">
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="4"
+			android:gravity="center_vertical"
+			android:orientation="vertical">
+			<TextView
+				android:layout_width="wrap_content"
+				android:layout_height="0dp"
+				android:layout_gravity="center_horizontal"
+				android:layout_weight="5"
+				android:gravity="center"
+				android:text="@string/how_long"
+				android:textSize="18sp"
+				android:textStyle="bold" />
+			
+			<android.support.design.widget.TextInputEditText
+				android:id="@+id/multipart_setup_total_duration_and_number_duration"
+				android:layout_width="wrap_content"
+				android:layout_height="0dp"
+				android:layout_gravity="center_horizontal"
+				android:layout_weight="2"
+				android:inputType="number"
+				android:hint="Duration" />
+		</LinearLayout>
+		
+		<LinearLayout
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:layout_weight="4"
+			android:orientation="vertical">
+			<TextView
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginTop="30dp"
+				android:gravity="center"
+				android:text="@string/how_many_parts"
+				android:textSize="18sp"
+				android:textStyle="bold" />
+			
+			<com.beeva.labs.timetimer.support.ui.NumberPicker
+				android:id="@+id/multipart_setup_total_duration_and_number_number_picker"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:layout_gravity="center_horizontal"
+				max="10"
+				min="2" />
+		</LinearLayout>
+	</LinearLayout>
+	
+	<LinearLayout
+		android:id="@+id/multipart_setup_total_duration_and_number_ok_button"
+		android:layout_width="match_parent"
+		android:layout_height="0dp"
+		android:layout_weight="1"
+		android:layout_margin="20dp"
+		android:background="@color/colorAccent"
+		android:contentDescription="@string/label_landing_sign_up_linear_layout"
+		android:foreground="?selectableItemBackground"
+		android:gravity="center"
+		android:orientation="vertical">
+		
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/ok"
+			android:textAlignment="center"
+			android:textColor="@android:color/white"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			tools:ignore="NestedWeights" />
+	
+	</LinearLayout>
+
+</LinearLayout>

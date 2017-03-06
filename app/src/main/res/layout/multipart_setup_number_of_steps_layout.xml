@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:gravity="center"
+	android:orientation="vertical">
+
+	<TextView
+		android:id="@+id/multipart_setup_title"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:text="@string/multipart_setup"
+		android:layout_alignParentTop="true"
+		android:textSize="35sp"
+		android:textStyle="bold" />
+
+	<TextView
+		android:id="@+id/multipart_setup_subtitle"
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		android:gravity="center"
+		android:text="@string/how_many_parts"
+		android:textSize="18sp"
+		android:layout_below="@+id/multipart_setup_title"
+		android:layout_marginTop="30dp"
+		android:textStyle="bold" />
+
+	<com.beeva.labs.timetimer.support.ui.NumberPicker
+		android:id="@+id/multipart_setup_number_picker"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_centerInParent="true"
+		max="60"
+		min="2"/>
+
+	<LinearLayout
+		android:id="@+id/multipart_setup_ok_button"
+		android:layout_width="match_parent"
+		android:layout_height="70dp"
+		android:layout_marginEnd="20dp"
+		android:layout_marginStart="20dp"
+		android:background="@color/colorAccent"
+		android:layout_alignParentBottom="true"
+		android:contentDescription="@string/label_landing_sign_up_linear_layout"
+		android:foreground="?selectableItemBackground"
+		android:gravity="center"
+		android:orientation="vertical">
+
+		<TextView
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:text="@string/ok"
+			android:textAlignment="center"
+			android:textColor="@android:color/white"
+			android:textSize="16sp"
+			android:textStyle="bold"
+			tools:ignore="NestedWeights" />
+
+	</LinearLayout>
+
+</RelativeLayout>

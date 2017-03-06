@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:gravity="center"
+	android:orientation="vertical"
+	android:weightSum="1">
+
+	<android.support.v7.widget.RecyclerView
+		android:id="@+id/multipart_session_recycler_view"
+		android:layout_width="match_parent"
+		android:layout_alignParentTop="true"
+		android:layout_height="wrap_content"
+		android:layout_above="@+id/multipart_session_button_ok"
+		android:layout_marginTop="15dp" />
+
+	<Button
+		android:id="@+id/multipart_session_button_ok"
+		android:layout_width="150dp"
+		android:layout_height="wrap_content"
+		android:layout_alignParentEnd="true"
+		android:layout_alignParentBottom="true"
+		android:layout_centerVertical="true"
+		android:layout_marginTop="@dimen/activity_vertical_margin"
+		android:backgroundTint="@color/colorAccent"
+		android:text="@string/start"
+		android:textColor="@android:color/white"
+		android:textStyle="bold" />
+
+</RelativeLayout>

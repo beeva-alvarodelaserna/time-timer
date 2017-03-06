@@ -1,0 +1,89 @@
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+buildscript {
+	repositories { maven { url 'https://maven.fabric.io/public' } }
+	dependencies { classpath 'io.fabric.tools:gradle:1.19.2' }
+}
+
+repositories {
+	maven { url 'https://maven.fabric.io/public' }
+}
+
+def code = 1
+def name = "v0.1"
+
+android {
+
+	compileSdkVersion 25
+	buildToolsVersion "25.0.2"
+
+	defaultConfig {
+		applicationId "com.beeva.labs.timetimer"
+		minSdkVersion 23
+		targetSdkVersion 25
+		versionCode code
+		versionName name
+		multiDexEnabled true
+		setProperty("archivesBaseName", "TimeTimer-$versionName")
+	}
+
+	buildTypes {
+		release {
+			minifyEnabled true
+			proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+		}
+	}
+
+	productFlavors {
+		dev {
+			applicationId "com.beeva.labs.timetimer.dev"
+			versionName name + "-dev"
+			resValue "string", "app_name", "TimeTimer"
+			resValue "string", "version_name", versionName
+		}
+		pre {
+			applicationId "com.beeva.labs.timetimer.pre"
+			versionName name + "-pre"
+			resValue "string", "app_name", "TimeTimer"
+			resValue "string", "version_name", versionName
+		}
+	}
+
+	compileOptions {
+		incremental false
+	}
+}
+
+def supportVersion = '25.0.1'
+
+dependencies {
+	compile project(':uid'),project(':dep')
+	compile fileTree(dir: 'libs', include: '*.jar')
+	compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') { transitive = true; }
+	compile "com.android.support:appcompat-v7:${supportVersion}",
+		"com.android.support:design:${supportVersion}",
+		"com.android.support:percent:${supportVersion}",
+		"com.android.support:cardview-v7:${supportVersion}",
+		"com.android.support:recyclerview-v7:${supportVersion}",
+		"com.android.support:gridlayout-v7:${supportVersion}"
+	compile 'com.wokdsem.kommander:kommander:0.10.1',
+		'com.wokdsem.kinject:kinject:1.1.0'
+	compile 'com.intelygenz.android:support:1.0.3'
+	compile 'com.hbb20:ccp:1.6',
+		'de.hdodenhof:circleimageview:2.1.0'
+	compile 'cn.fanrunqi:waveprogress:1.0.1'
+	compile 'com.getbase:floatingactionbutton:1.10.1'
+	compile 'io.card:android-sdk:5.4.0'
+	compile 'com.github.bumptech.glide:glide:3.7.0'
+	compile 'com.theartofdev.edmodo:android-image-cropper:2.3.1'
+	compile 'com.afollestad:material-camera:0.4.4'
+	compile 'com.github.chrisbanes:PhotoView:1.3.1'
+	compile 'com.github.esafirm.android-image-picker:imagepicker:1.2.5@aar'
+	compile 'com.nineoldandroids:library:2.4.0'
+	compile 'com.github.barteksc:android-pdf-viewer:2.4.0'
+	compile 'com.github.rey5137:material:1.2.4'
+
+	annotationProcessor 'com.wokdsem.kinject:kinject-compiler:1.1.0'
+	testCompile 'junit:junit:4.12'
+}
