@@ -316,4 +316,6 @@
 	<string name="session_running">Session %s is running. Press center to pause.</string>
 	<string name="paused">Paused. Press center to continue.</string>
 	<string name="center_to_start">Press center to start</string>
+	<string name="remaining_time">%s minutes remaining</string>
+	<string name="time_excedded">You only have %s minutes left</string>
 </resources>

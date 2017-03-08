@@ -150,14 +150,14 @@ class MultipartSetupDurationAndNameOfStepsView extends BaseFragmentView {
 		slider.setValue(0f, false);
 	}
 	
-	void initSessionSetup(int totalDurationInMinutes, int numberOfSteps) {
+	void initSessionSetup(int totalDuration, int numberOfSteps) {
 		initSessionSetup(numberOfSteps);
-		this.totalDuration = totalDurationInMinutes;
-		timerView.setMaxSeconds(totalDurationInMinutes);
-		MAX_VALUE_IN_SECONDS = totalDurationInMinutes * 60;
-		MAX_VALUE_IN_MINUTES = totalDurationInMinutes * 3600;
-		MAX_VALUE_IN_SECONDS_FLOAT = totalDurationInMinutes * 60F;
-		MAX_VALUE_IN_MINUTES_FLOAT = totalDurationInMinutes * 3600F;
+		this.totalDuration = totalDuration;
+		timerView.setMaxSeconds(totalDuration);
+		MAX_VALUE_IN_SECONDS = totalDuration;
+		MAX_VALUE_IN_MINUTES = totalDuration * 60;
+		MAX_VALUE_IN_SECONDS_FLOAT = totalDuration;
+		MAX_VALUE_IN_MINUTES_FLOAT = totalDuration * 60F;
 	}
 	
 	interface ViewListener {

@@ -30,4 +30,6 @@
 	<string name="session_running">La parte %s está activa. Pulsa en el centro para parar.</string>
 	<string name="paused">En pausa. Pulsa en el centro para continuar.</string>
 	<string name="center_to_start">Pulsa en el centro para empezar.</string>
+	<string name="remaining_time">Quedan %s minutos</string>
+	<string name="time_excedded">Solo quedan %s minutos disponibles</string>
 </resources>
