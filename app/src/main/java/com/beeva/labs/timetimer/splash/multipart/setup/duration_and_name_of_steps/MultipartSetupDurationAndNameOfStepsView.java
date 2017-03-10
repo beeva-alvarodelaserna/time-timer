@@ -11,7 +11,6 @@ import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
 import com.beeva.labs.timetimer.R;
 import com.beeva.labs.timetimer.instruments.utils.StringUtils;
 import com.beeva.labs.timetimer.support.base.BaseFragmentView;

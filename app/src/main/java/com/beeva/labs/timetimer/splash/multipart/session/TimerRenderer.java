@@ -12,10 +12,6 @@ import com.beeva.labs.timetimer.support.ui.TimerView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by alvaro.delaserna on 2/3/17.
- */
-
 public class TimerRenderer {
 
 	private final ItemSubtypesRecyclerViewAdapter adapter;
