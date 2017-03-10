@@ -2,7 +2,7 @@ package com.beeva.labs.timetimer.splash.survey;
 
 import android.view.View;
 import android.widget.LinearLayout;
-import com.bbva.kst.uniqueid.R;
+import com.beeva.labs.timetimer.R;
 import com.beeva.labs.timetimer.support.base.BaseFragmentView;
 
 public class SurveyView extends BaseFragmentView {

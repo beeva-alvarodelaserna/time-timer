@@ -4,7 +4,7 @@ import android.support.annotation.LayoutRes;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.bbva.kst.uniqueid.instruments.inject.Injector;
+import com.beeva.labs.timetimer.instruments.inject.Injector;
 
 public class BaseFragmentView {
 

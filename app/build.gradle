@@ -1,12 +1,5 @@
 apply plugin: 'com.android.application'
 
-buildscript {
-}
-
-repositories {
-	maven { url 'https://maven.fabric.io/public' }
-}
-
 def code = 1
 def name = "v0.1"
 
@@ -55,9 +48,8 @@ android {
 def supportVersion = '25.0.1'
 
 dependencies {
-	compile project(':uid'),project(':dep')
+	compile project(':uid')
 	compile fileTree(dir: 'libs', include: '*.jar')
-	compile('com.crashlytics.sdk.android:crashlytics:2.6.5@aar') { transitive = true; }
 	compile "com.android.support:appcompat-v7:${supportVersion}",
 		"com.android.support:design:${supportVersion}",
 		"com.android.support:percent:${supportVersion}",
@@ -66,7 +58,6 @@ dependencies {
 		"com.android.support:gridlayout-v7:${supportVersion}"
 	compile 'com.wokdsem.kommander:kommander:0.10.1',
 		'com.wokdsem.kinject:kinject:1.1.0'
-	compile 'com.intelygenz.android:support:1.0.3'
 	compile 'com.hbb20:ccp:1.6',
 		'de.hdodenhof:circleimageview:2.1.0'
 	compile 'cn.fanrunqi:waveprogress:1.0.1'

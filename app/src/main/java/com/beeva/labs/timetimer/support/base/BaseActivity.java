@@ -4,8 +4,8 @@ import android.os.Bundle;
 import android.support.annotation.CallSuper;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import com.bbva.kst.uniqueid.instruments.inject.AppInjector;
-import com.bbva.kst.uniqueid.instruments.inject.Injector;
+import com.beeva.labs.timetimer.instruments.inject.AppInjector;
+import com.beeva.labs.timetimer.instruments.inject.Injector;
 import com.beeva.labs.timetimer.support.inject.KinjectInjector;
 import com.beeva.labs.timetimer.support.inject.modules.activity.BaseActivityModule;
 

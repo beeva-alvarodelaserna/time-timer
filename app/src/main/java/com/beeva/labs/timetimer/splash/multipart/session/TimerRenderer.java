@@ -6,7 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import com.bbva.kst.uniqueid.R;
+import com.beeva.labs.timetimer.R;
 import com.beeva.labs.timetimer.support.ui.SessionStep;
 import com.beeva.labs.timetimer.support.ui.TimerView;
 import java.util.ArrayList;

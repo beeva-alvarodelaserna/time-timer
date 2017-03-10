@@ -4,13 +4,15 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Point;
+import android.support.v7.widget.Toolbar;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
-import com.bbva.kst.uniqueid.R;
+import com.beeva.labs.timetimer.R;
 import com.beeva.labs.timetimer.support.base.BaseFragmentView;
+import com.beeva.labs.timetimer.support.base.ViewNavigator;
 import com.beeva.labs.timetimer.support.ui.TimerView;
 import com.rey.material.widget.Slider;
 
@@ -18,7 +20,7 @@ public class QuickStartView extends BaseFragmentView {
 	
 	private final ViewListener viewListener;
 	
-	private int TIMER_LENGTH;
+	private int TIMER_LENGTH = 15;
 	private final float MAX_VALUE_IN_MINUTES_FLOAT = 3600F;
 	private final float MAX_VALUE_IN_SECONDS_FLOAT = 60F;
 	private final int MAX_VALUE_IN_MINUTES = 3600;
@@ -41,6 +43,8 @@ public class QuickStartView extends BaseFragmentView {
 	
 	@Override
 	protected void setUpView(View view) {
+		Toolbar toolbar = (Toolbar) view.findViewById(R.id.toolbar);
+		viewContextInject(ViewNavigator.class).setUpNavigation(toolbar);
 		Display display = ((Activity) viewContextInject(Context.class)).getWindowManager()
 			.getDefaultDisplay();
 		Point size = new Point();
@@ -55,17 +59,11 @@ public class QuickStartView extends BaseFragmentView {
 			public void onPositionChanged(
 				Slider view, boolean fromUser, float oldPos, float newPos, int oldValue,
 				int newValue) {
-				mTimerView.pause();
-				timerIsRunning = false;
-				timerIsPaused = false;
-				mTimerView.setCircleColor(viewContextInject(Context.class).getResources()
-											  .getColor(R.color.colorAccent));
 				float percentPosition = newValue / 100F;
 				TIMER_LENGTH = (int) (percentPosition * MAX_VALUE_IN_SECONDS);
 				float progress = (MAX_VALUE_IN_SECONDS - TIMER_LENGTH) / MAX_VALUE_IN_SECONDS_FLOAT;
 				mTimerView.drawProgress(progress, false);
 				duration.setText(String.valueOf(TIMER_LENGTH));
-				paintButtonBlue(timerIsPaused);
 			}
 		});
 		timerStartButton = (Button) view.findViewById(R.id.quick_start_btn_timer_start);
@@ -106,24 +104,21 @@ public class QuickStartView extends BaseFragmentView {
 	}
 	
 	void startTimer() {
-		if (TIMER_LENGTH != 0) {
-			if (timerIsPaused) {
-				timerIsRunning = true;
-				timerIsPaused = false;
-				paintButtonYellow();
-				mTimerView.setCircleColor(viewContextInject(Context.class).getResources()
-											  .getColor(R.color.errorColor));
-				mTimerView.resume();
-			} else {
-				timerIsRunning = true;
-				timerIsPaused = false;
-				paintButtonYellow();
-				mTimerView.setCircleColor(viewContextInject(Context.class).getResources()
-											  .getColor(R.color.errorColor));
-				//mTimerView.start(TIMER_LENGTH * 60, viewListener);
-				mTimerView.startInSeconds(TIMER_LENGTH, viewListener);
-				
-			}
+		if (timerIsPaused) {
+			timerIsRunning = true;
+			timerIsPaused = false;
+			paintButtonYellow();
+			mTimerView.setCircleColor(viewContextInject(Context.class).getResources()
+										  .getColor(R.color.errorColor));
+			mTimerView.resume();
+		} else {
+			timerIsRunning = true;
+			timerIsPaused = false;
+			paintButtonYellow();
+			mTimerView.setCircleColor(viewContextInject(Context.class).getResources()
+										  .getColor(R.color.errorColor));
+			//mTimerView.start(TIMER_LENGTH * 60, viewListener);
+			mTimerView.startInSeconds(TIMER_LENGTH, viewListener);
 		}
 	}
 	
@@ -131,15 +126,11 @@ public class QuickStartView extends BaseFragmentView {
 		timerIsRunning = false;
 		timerIsPaused = true;
 		mTimerView.pause();
-		paintButtonBlue(timerIsPaused);
+		paintButtonBlue();
 	}
 	
-	void paintButtonBlue(boolean timerIsPaused) {
-		if (timerIsPaused) {
-			timerStartButton.setText(R.string.resume);
-		} else {
-			timerStartButton.setText(R.string.start);
-		}
+	void paintButtonBlue() {
+		timerStartButton.setText(R.string.resume);
 		timerStartButton.setBackgroundTintList(ColorStateList.valueOf(
 			viewContextInject(Context.class).getResources()
 				.getColor(R.color.colorAccent)));
@@ -152,19 +143,6 @@ public class QuickStartView extends BaseFragmentView {
 				.getColor(R.color.errorColor)));
 	}
 	
-	void updateTimerWithVoiceInput(int numericValue) {
-		if (numericValue > MAX_VALUE_IN_SECONDS) {
-			viewListener.onVoiceInputExceedsLimit();
-		} else {
-			TIMER_LENGTH = numericValue;
-			float progress = (MAX_VALUE_IN_SECONDS - TIMER_LENGTH) / MAX_VALUE_IN_SECONDS_FLOAT;
-			float percentValue = (TIMER_LENGTH / MAX_VALUE_IN_SECONDS_FLOAT) * 100;
-			slider.setValue(percentValue, true);
-			mTimerView.drawProgress(progress, false);
-			duration.setText(String.valueOf(TIMER_LENGTH));
-		}
-	}
-	
 	public interface ViewListener {
 		
 		void onTimerStart();
@@ -174,8 +152,6 @@ public class QuickStartView extends BaseFragmentView {
 		void onTimerFinished();
 		
 		void onPromptVoiceInput();
-		
-		void onVoiceInputExceedsLimit();
 	}
 	
 }

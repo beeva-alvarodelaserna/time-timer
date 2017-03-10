@@ -1,9 +1,11 @@
 package com.beeva.labs.timetimer.splash.multipart.setup.number_of_steps;
 
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.LinearLayout;
-import com.bbva.kst.uniqueid.R;
+import com.beeva.labs.timetimer.R;
 import com.beeva.labs.timetimer.support.base.BaseFragmentView;
+import com.beeva.labs.timetimer.support.base.ViewNavigator;
 import com.beeva.labs.timetimer.support.ui.NumberPicker;
 
 class MultipartSetupNumberOfStepsView extends BaseFragmentView {
@@ -19,6 +21,8 @@ class MultipartSetupNumberOfStepsView extends BaseFragmentView {
 
 	@Override
 	protected void setUpView(View view) {
+		Toolbar toolbar = (Toolbar) view.findViewById(R.id.multipart_setup_toolbar);
+		viewContextInject(ViewNavigator.class).setUpNavigation(toolbar);
 		NumberPicker numberPicker = (NumberPicker) view.findViewById(
 			R.id.multipart_setup_number_picker);
 		numberPicker.setOnValueChangedListener(

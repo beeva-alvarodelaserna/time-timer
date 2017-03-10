@@ -3,7 +3,7 @@ package com.beeva.labs.timetimer.splash.landing;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import com.bbva.kst.uniqueid.R;
+import com.beeva.labs.timetimer.R;
 import com.beeva.labs.timetimer.support.base.BaseFragmentView;
 
 class LandingView extends BaseFragmentView {

@@ -5,8 +5,7 @@ import android.content.DialogInterface;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import com.bbva.kst.uniqueid.R;
-import com.beeva.labs.timetimer.splash.survey.SurveyFragment;
+import com.beeva.labs.timetimer.R;
 import com.beeva.labs.timetimer.support.base.ActivityNavigator;
 import com.beeva.labs.timetimer.support.base.BaseFragment;
 import com.beeva.labs.timetimer.support.base.BaseInteractor;
@@ -125,16 +124,15 @@ public class MultipartSessionFragment extends BaseFragment<MultipartSessionView,
 			.setPositiveButton(R.string.ok, new DialogInterface.OnClickListener() {
 				@Override
 				public void onClick(DialogInterface dialog, int which) {
-					goToSurvey();
+					goBack();
 				}
 
 			})
 			.show();
 	}
 
-	private void goToSurvey() {
-		SurveyFragment surveyFragment = SurveyFragment.newInstance();
-		viewContextInject(ActivityNavigator.class).navigate(surveyFragment);
+	private void goBack() {
+		viewContextInject(ActivityNavigator.class).navigateUp();
 	}
 
 	private void finishSession() {

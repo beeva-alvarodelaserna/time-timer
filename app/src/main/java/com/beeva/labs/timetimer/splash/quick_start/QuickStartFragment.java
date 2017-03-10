@@ -5,7 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.speech.RecognizerIntent;
-import com.bbva.kst.uniqueid.R;
+import com.beeva.labs.timetimer.R;
 import com.beeva.labs.timetimer.splash.survey.SurveyFragment;
 import com.beeva.labs.timetimer.support.base.ActivityNavigator;
 import com.beeva.labs.timetimer.support.base.BaseFragment;
@@ -60,12 +60,6 @@ public class QuickStartFragment extends BaseFragment<QuickStartView, BaseInterac
 				promptSpeechInput();
 			}
 			
-			@Override
-			public void onVoiceInputExceedsLimit() {
-				ToastUtils.showShort(viewContextInject(Context.class), "Value should not exceed "
-																	   + "maximum value (60)");
-			}
-			
 		});
 	}
 
@@ -94,11 +88,11 @@ public class QuickStartFragment extends BaseFragment<QuickStartView, BaseInterac
 						RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
 		intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, Locale.getDefault());
 		intent.putExtra(RecognizerIntent.EXTRA_PROMPT,
-						getString(R.string.say_a_number));
+						"Say a number");
 		try {
 			startActivityForResult(intent, REQ_CODE_SPEECH_INPUT);
 		} catch (ActivityNotFoundException a) {
-			ToastUtils.showShort(viewContextInject(Context.class), getString(R.string.voice_input_not_supported));
+			ToastUtils.showShort(viewContextInject(Context.class), "Voice input unsupported");
 		}
 	}
 
@@ -115,18 +109,7 @@ public class QuickStartFragment extends BaseFragment<QuickStartView, BaseInterac
 
 					ArrayList<String> result = data
 						.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-					
-					//ToastUtils.show(viewContextInject(Context.class), "You said: " + result.get(0));
-					String number = result.get(0);
-					try {
-						int numericValue = Integer.parseInt(number);
-						if (fragmentView != null) {
-							fragmentView.updateTimerWithVoiceInput(numericValue);
-						}
-					} catch (NumberFormatException e) {
-						ToastUtils.show(viewContextInject(Context.class), "You said: " + result
-							.get(0) + ". Please provide a single number.");
-					}
+					ToastUtils.show(viewContextInject(Context.class), "You said: " + result.get(0));
 				}
 				break;
 			}

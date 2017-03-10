@@ -5,15 +5,17 @@ import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Point;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.view.Display;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import com.bbva.kst.uniqueid.R;
-import com.bbva.kst.uniqueid.instruments.utils.StringUtils;
+import com.beeva.labs.timetimer.R;
+import com.beeva.labs.timetimer.instruments.utils.StringUtils;
 import com.beeva.labs.timetimer.support.base.BaseFragmentView;
+import com.beeva.labs.timetimer.support.base.ViewNavigator;
 import com.beeva.labs.timetimer.support.ui.TextWatcher;
 import com.beeva.labs.timetimer.support.ui.TimerView;
 import com.beeva.labs.timetimer.support.ui.ToastUtils;
@@ -30,15 +32,14 @@ class MultipartSetupDurationAndNameOfStepsView extends BaseFragmentView {
 	private float MAX_VALUE_IN_SECONDS_FLOAT = 60F;
 	private int MAX_VALUE_IN_SECONDS = 60;
 	private final float CIRCLE = 360F; // 360 degrees
-	private int remainingTime;
 	
-	private TextView title;
 	private Button duration;
 	private TextInputEditText partNameInput;
 	private String partName;
 	private Button okButton;
 	private TimerView timerView;
 	private Slider slider;
+	private Toolbar toolbar;
 	
 	MultipartSetupDurationAndNameOfStepsView(ViewListener viewListener) {
 		super(R.layout.multipart_setup_duration_and_name_layout);
@@ -47,7 +48,8 @@ class MultipartSetupDurationAndNameOfStepsView extends BaseFragmentView {
 	
 	@Override
 	protected void setUpView(View view) {
-		remainingTime = MAX_VALUE_IN_SECONDS;
+		toolbar = (Toolbar) view.findViewById(R.id.multipart_setup_duration_and_name_toolbar);
+		viewContextInject(ViewNavigator.class).setUpNavigation(toolbar);
 		Display display = ((Activity) viewContextInject(Context.class)).getWindowManager()
 			.getDefaultDisplay();
 		Point size = new Point();
@@ -57,7 +59,6 @@ class MultipartSetupDurationAndNameOfStepsView extends BaseFragmentView {
 		duration = (Button) view.findViewById(R.id.multipart_setup_duration_and_name_duration);
 		okButton = (Button) view.findViewById(
 			R.id.multipart_setup_duration_and_name_btn_timer_start);
-		title = (TextView) view.findViewById(R.id.multipart_setup_duration_and_name_title);
 		partNameInput = (TextInputEditText) view.findViewById(
 			R.id.multipart_setup_duration_and_name_part_name);
 		partNameInput.addTextChangedListener(new TextWatcher() {
@@ -130,7 +131,7 @@ class MultipartSetupDurationAndNameOfStepsView extends BaseFragmentView {
 	}
 	
 	private void setTitle(int currentStep) {
-		title.setText(String.format(viewContextInject(Context.class).getString(
+		toolbar.setTitle(String.format(viewContextInject(Context.class).getString(
 			R.string.set_the_duration_of_part_with_format), String.valueOf(currentStep + 1)));
 	}
 	
@@ -150,14 +151,14 @@ class MultipartSetupDurationAndNameOfStepsView extends BaseFragmentView {
 		slider.setValue(0f, false);
 	}
 	
-	void initSessionSetup(int totalDuration, int numberOfSteps) {
+	void initSessionSetup(int totalDurationInMinutes, int numberOfSteps) {
 		initSessionSetup(numberOfSteps);
-		this.totalDuration = totalDuration;
-		timerView.setMaxSeconds(totalDuration);
-		MAX_VALUE_IN_SECONDS = totalDuration;
-		MAX_VALUE_IN_MINUTES = totalDuration * 60;
-		MAX_VALUE_IN_SECONDS_FLOAT = totalDuration;
-		MAX_VALUE_IN_MINUTES_FLOAT = totalDuration * 60F;
+		this.totalDuration = totalDurationInMinutes;
+		timerView.setMaxSeconds(totalDurationInMinutes);
+		MAX_VALUE_IN_SECONDS = totalDurationInMinutes * 60;
+		MAX_VALUE_IN_MINUTES = totalDurationInMinutes * 3600;
+		MAX_VALUE_IN_SECONDS_FLOAT = totalDurationInMinutes * 60F;
+		MAX_VALUE_IN_MINUTES_FLOAT = totalDurationInMinutes * 3600F;
 	}
 	
 	interface ViewListener {

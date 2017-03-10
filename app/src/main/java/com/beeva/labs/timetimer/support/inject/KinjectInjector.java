@@ -1,6 +1,6 @@
 package com.beeva.labs.timetimer.support.inject;
 
-import com.bbva.kst.uniqueid.instruments.inject.Injector;
+import com.beeva.labs.timetimer.instruments.inject.Injector;
 import com.wokdsem.kinject.Kinject;
 
 public class KinjectInjector implements Injector {

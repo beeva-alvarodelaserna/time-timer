@@ -19,12 +19,7 @@ public class AppModule {
 	CoreModule includeCoreModule() {
 		return new CoreModule();
 	}
-
-	@Includes
-	DepModule includeDepModule() {
-		return new DepModule();
-	}
-
+	
 	@Provides
 	Context provideAppContext() {
 		return app;

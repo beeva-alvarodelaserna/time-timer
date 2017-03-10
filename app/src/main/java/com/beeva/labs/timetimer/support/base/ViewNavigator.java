@@ -3,7 +3,7 @@ package com.beeva.labs.timetimer.support.base;
 import android.support.annotation.DrawableRes;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import com.bbva.kst.uniqueid.R;
+import com.beeva.labs.timetimer.R;
 
 public class ViewNavigator {
 

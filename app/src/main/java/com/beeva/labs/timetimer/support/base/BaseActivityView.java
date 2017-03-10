@@ -3,7 +3,7 @@ package com.beeva.labs.timetimer.support.base;
 import android.support.annotation.IdRes;
 import android.support.annotation.LayoutRes;
 import android.view.View;
-import com.bbva.kst.uniqueid.instruments.inject.Injector;
+import com.beeva.labs.timetimer.instruments.inject.Injector;
 
 public class BaseActivityView {
 

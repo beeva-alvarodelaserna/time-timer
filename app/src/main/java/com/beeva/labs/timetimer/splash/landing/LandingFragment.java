@@ -1,7 +1,7 @@
 package com.beeva.labs.timetimer.splash.landing;
 
 import android.content.Context;
-import com.bbva.kst.uniqueid.R;
+import com.beeva.labs.timetimer.R;
 import com.beeva.labs.timetimer.splash.multipart.setup.number_of_steps.MultipartSetupNumberOfStepsFragment;
 import com.beeva.labs.timetimer.splash.quick_start.QuickStartFragment;
 import com.beeva.labs.timetimer.support.base.ActivityNavigator;

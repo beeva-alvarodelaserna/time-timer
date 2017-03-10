@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import com.bbva.kst.uniqueid.instruments.inject.Injector;
+import com.beeva.labs.timetimer.instruments.inject.Injector;
 
 public abstract class BaseFragment<V extends BaseFragmentView, I extends BaseInteractor> extends Fragment {
 

@@ -4,7 +4,7 @@ import android.app.Application;
 import com.beeva.labs.timetimer.support.inject.KinjectInjector;
 import com.beeva.labs.timetimer.support.inject.modules.app.AppModule;
 
-import static com.bbva.kst.uniqueid.instruments.inject.AppInjector.initInjector;
+import static com.beeva.labs.timetimer.instruments.inject.AppInjector.initInjector;
 
 public class TimeTimerApp extends Application {
 

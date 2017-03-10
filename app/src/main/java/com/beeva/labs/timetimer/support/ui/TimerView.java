@@ -14,7 +14,7 @@ import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.animation.LinearInterpolator;
-import com.bbva.kst.uniqueid.R;
+import com.beeva.labs.timetimer.R;
 import com.beeva.labs.timetimer.splash.multipart.session.MultipartSessionView;
 import com.beeva.labs.timetimer.splash.multipart.session_concentric.MultipartSessionConcentricView;
 import com.beeva.labs.timetimer.splash.quick_start.QuickStartView;
@@ -236,7 +236,7 @@ public class TimerView extends View {
 	
 	public void startInSeconds(
 		final int position, int secs,
-		final MultipartSessionView.ViewListener viewListener) {
+		final MultipartSessionConcentricView.ViewListener viewListener) {
 		stop();
 		float progress = (MAX_SECONDS_ONE_MINUTE - secs) / MAX_SECONDS_ONE_MINUTE_FLOAT;
 		drawProgress(progress, false);

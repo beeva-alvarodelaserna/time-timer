@@ -309,13 +309,5 @@
 	<string name="nice_job">Nice job</string>
 	<string name="next_time_better">Next time will be better</string>
 	<string name="how_long">What\'s the total duration (in minutes)?</string>
-	<string name="say_a_number">Say a number</string>
-	<string name="voice_input_not_supported">Voice input unsupported</string>
-	<string name="new_meeting">New meeting</string>
-	<string name="quit">Quit</string>
-	<string name="session_running">Session %s is running. Press center to pause.</string>
-	<string name="paused">Paused. Press center to continue.</string>
-	<string name="center_to_start">Press center to start</string>
-	<string name="remaining_time">%s minutes remaining</string>
-	<string name="time_excedded">You only have %s minutes left</string>
+	<string name="survey">Survey</string>
 </resources>

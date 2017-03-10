@@ -5,7 +5,7 @@ import android.content.DialogInterface;
 import android.media.Ringtone;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import com.bbva.kst.uniqueid.R;
+import com.beeva.labs.timetimer.R;
 import com.beeva.labs.timetimer.splash.survey.SurveyFragment;
 import com.beeva.labs.timetimer.support.base.ActivityNavigator;
 import com.beeva.labs.timetimer.support.base.BaseFragment;

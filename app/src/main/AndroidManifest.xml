@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
 		  xmlns:tools="http://schemas.android.com/tools"
-		  package="com.bbva.kst.uniqueid">
-	
-	<uses-permission android:name="android.permission.INTERNET"/>
-	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+		  package="com.beeva.labs.timetimer">
 
 	<application
-		android:name="com.beeva.labs.timetimer.TimeTimerApp"
+		android:name=".TimeTimerApp"
 		tools:replace="android:allowBackup"
 		android:allowBackup="false"
 		android:fullBackupContent="true"
@@ -17,7 +14,7 @@
 		android:theme="@style/AppTheme">
 
 		<activity
-			android:name="com.beeva.labs.timetimer.splash.SplashActivity"
+			android:name=".splash.SplashActivity"
 			android:screenOrientation="portrait"
 			android:theme="@style/SplashTheme"
 			android:windowSoftInputMode="adjustResize">

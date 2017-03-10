@@ -1,7 +1,7 @@
 package com.beeva.labs.timetimer.support.base;
 
-import com.bbva.kst.uniqueid.instruments.inject.AppInjector;
-import com.bbva.kst.uniqueid.instruments.inject.Injector;
+import com.beeva.labs.timetimer.instruments.inject.AppInjector;
+import com.beeva.labs.timetimer.instruments.inject.Injector;
 import com.wokdsem.kommander.Kommander;
 import java.util.concurrent.atomic.AtomicLong;
 
