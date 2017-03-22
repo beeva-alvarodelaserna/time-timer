@@ -10,7 +10,7 @@ const route = {
     type: 'push',
     route: {
         key: 'about',
-        title: 'About'
+        title: 'SimpleSession'
     }
 };
 

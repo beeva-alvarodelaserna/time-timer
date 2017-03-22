@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Home from './Home'
-import About from './About'
+import SimpleSession from './SimpleSession'
 
 import {
     BackAndroid,
@@ -30,7 +30,7 @@ class NavRoot extends Component {
                 _handleNavigate={this._handleNavigate.bind(this)} />
         }
         if (route.key === 'about') {
-            return <About _goBack={this._handleBackAction.bind(this)} />
+            return <SimpleSession _goBack={this._handleBackAction.bind(this)} />
         }
     }
     _handleBackAction () {
