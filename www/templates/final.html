@@ -1,5 +1,13 @@
-<ion-view>
+<ion-view view-title="Final" ng-init="parseResult()">
   <ion-content>
-    <h1>¿Ha sido una reunión productiva?</h1>
+    <h1>{{message}}</h1>
+    <button ng-click="goBack()"
+            class="button button-block button-balanced">
+      Tener otra reunión
+    </button>
+    <button ng-click="quit()"
+            class="button button-block button-energized">
+      Salir
+    </button>
   </ion-content>
 </ion-view>

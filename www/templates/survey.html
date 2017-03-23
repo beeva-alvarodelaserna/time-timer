@@ -1,5 +1,18 @@
 <ion-view view-title="Survey">
-  <ion-content>
-    <h1>¿Ha sido una reunión productiva?</h1>
-  </ion-content>
+    <ion-content>
+        <h1>¿Ha sido una reunión productiva?</h1>
+        <button ng-click="goToFinalView(0)"
+                class="button button-block button-balanced">
+            Sí
+        </button>
+        <button ng-click="goToFinalView(1)"
+                class="button button-block button-energized">
+            Meh
+        </button>
+        <button ng-click="goToFinalView(2)"
+                class="button button-block button-assertive">
+            No
+        </button>
+
+    </ion-content>
 </ion-view>

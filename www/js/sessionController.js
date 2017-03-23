@@ -1,12 +1,12 @@
 angular.module('session.controllers', ['chart.js'])
-    .controller('SessionCtrl', function ($scope, $stateParams, $ionicHistory, $ionicPopup) {
-        console.log($stateParams);
-
+    .controller('SessionCtrl', function ($scope, $stateParams, $ionicHistory, $ionicPopup, $state) {
         var timer;
 
         const maxTime = 60;
         let remainingTime = 60;
         let nonEmptyIndex = 0;
+
+        console.log($stateParams);
 
         $scope.sessionType = $stateParams.sessionId;
         $scope.isMultiple = $stateParams.sessionId !== '0';
@@ -32,10 +32,8 @@ angular.module('session.controllers', ['chart.js'])
 
         $scope.incrementSteps = function () {
             $scope.numberOfSteps++;
-            $scope.data.splice($scope.data.length-1, 0, 0);
+            $scope.data.splice($scope.data.length - 1, 0, 0);
             $scope.labels.push("");
-            console.log($scope.data);
-            console.log($scope.labels);
         };
 
         $scope.decrementSteps = function () {
@@ -101,13 +99,11 @@ angular.module('session.controllers', ['chart.js'])
         };
 
         $scope.finishSessionAndGoToSurvey = function () {
-          // TODO: show alert and go to new state
             $ionicPopup.alert({
-                title: 'Success',
-                content: 'Hello World!!!'
-            }).then(function(res) {
-                console.log(res);
-                console.log('Test Alert Box');
+                title: 'Se acabó',
+                content: '¡Reunión finalizada!'
+            }).then(function () {
+                $state.go('app.survey');
             });
         };
 

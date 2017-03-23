@@ -1,7 +1,7 @@
 angular.module('survey.controllers', [])
-    .controller('SurveyCtrl', function ($scope) {
+    .controller('SurveyCtrl', function ($scope, $state) {
 
-        $scope.goToFinalView = function () {
-            $state.go();
+        $scope.goToFinalView = function (option) {
+            $state.go('app.final', {optionId: option});
         };
     });
