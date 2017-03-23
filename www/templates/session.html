@@ -1,42 +1,68 @@
-<ion-view view-title="Session {{sessionType === '0' ? 'simple' : 'multiple'}}">
-  <ion-content>
-    <div class="row">
-      <div class="col">
-        <div class="text-center">
-          <canvas id="pie" class="chart chart-pie"
-                  chart-data="data" chart-labels="labels" chart-options="options">
-          </canvas>
-          <span
-            style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">{{data[0]}}</span>
+<ion-view view-title="Sesión {{sessionType === '0' ? 'simple' : 'multi parte'}}" ng-init="init()">
+    <ion-content>
+        <div ng-if="isMultiple" style="width: 100%" class="text-center">
+            <div class="row text-center">
+                <div class="text-center">
+                    Número de partes
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <i style="display: inline-block; font-size: x-large" class="icon ion-minus-circled" ng-click="decrementSteps()"></i>
+                </div>
+                <div class="col">
+                    <span style="display: inline-block; text-align: center">{{numberOfSteps}}</span>
+                </div>
+                <div class="col">
+                    <i style="display: inline-block; font-size: x-large" class="icon ion-plus-circled" ng-click="incrementSteps()"></i>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col">
-        <div class="text-center item range range-positive">
-          <input type="range" name="duration" min="0" max="60" ng-model="data[0]" ng-change="drag(data[0])">
+        <div class="row">
+            <div class="col">
+                <div class="text-center">
+                    <canvas id="pie" class="chart chart-pie"
+                            chart-data="data" chart-labels="labels" chart-options="options">
+                    </canvas>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-    <button ng-if="!isRunning && !isPaused"
-            ng-click="startTimer()"
-            class="button button-block button-positive">
-      Empezar
-    </button>
-    <button ng-if="isRunning && !isPaused"
-            ng-click="pauseOrResumeTimer()"
-            class="button button-block button-calm">
-      Pausar
-    </button>
-    <button ng-if="!isRunning && isPaused"
-            ng-click="pauseOrResumeTimer()"
-            class="button button-block button-balanced">
-      Continuar
-    </button>
-    <button ng-if="isRunning"
-            ng-click="stopTimer()"
-            class="button button-block button-assertive">
-      Parar
-    </button>
-  </ion-content>
+
+        <div class="row" ng-if="!isMultiple" ng-hide="isRunning || isPaused">
+            <div class="col">
+                <div class="text-center item range range-positive">
+                    <input type="range" name="duration" min="0" max="60" ng-model="data[0]" ng-change="drag(data[0])">
+                    <span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">{{data[0]}}</span>
+                </div>
+            </div>
+        </div>
+        <div class="row" ng-if="isMultiple" ng-hide="isRunning || isPaused">
+            <div class="col">
+                <div class="text-center item range range-positive" ng-repeat="i in range(numberOfSteps) track by $index">
+                    <input type="range" name="duration" min="0" max="60" ng-model="data[$index]" ng-change="dragIndex()">
+                    <span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">{{data[$index]}}</span>
+                </div>
+            </div>
+        </div>
+        <button ng-if="data[0] > 0 && !isRunning && !isPaused"
+                ng-click="startTimer()"
+                class="button button-block button-positive">
+            Empezar
+        </button>
+        <button ng-if="isRunning && !isPaused"
+                ng-click="pauseOrResumeTimer()"
+                class="button button-block button-calm">
+            Pausar
+        </button>
+        <button ng-if="!isRunning && isPaused"
+                ng-click="pauseOrResumeTimer()"
+                class="button button-block button-balanced">
+            Continuar
+        </button>
+        <button ng-if="isRunning"
+                ng-click="stopTimer()"
+                class="button button-block button-assertive">
+            Parar
+        </button>
+    </ion-content>
 </ion-view>

@@ -50,6 +50,26 @@ angular.module('starter', ['ionic', 'starter.controllers', 'session.controllers'
             controller: 'HomeCtrl'
           }
         }
+      })
+
+      .state('app.survey', {
+        url: '/survey',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/survey.html',
+            controller: 'SurveyCtrl'
+          }
+        }
+      })
+
+      .state('app.final', {
+        url: '/final',
+        views: {
+          'menuContent': {
+            templateUrl: 'templates/final.html',
+            controller: 'FinalCtrl'
+          }
+        }
       });
     // if none of the above states are matched, use this as the fallback
     $urlRouterProvider.otherwise('/app/home');
