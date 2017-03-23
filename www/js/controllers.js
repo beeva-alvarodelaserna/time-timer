@@ -44,7 +44,7 @@ angular.module('starter.controllers', [])
   .controller('HomeCtrl', function ($scope, $state) {
     $scope.sessions = [
       {title: 'Simple', id: 0},
-      {title: 'Multipart', id: 1}
+      {title: 'Multi parte', id: 1}
     ];
 
     $scope.showSession = function (sessionId) {
