@@ -1,0 +1,42 @@
+<ion-view view-title="Session {{sessionType === '0' ? 'simple' : 'multiple'}}">
+  <ion-content>
+    <div class="row">
+      <div class="col">
+        <div class="text-center">
+          <canvas id="pie" class="chart chart-pie"
+                  chart-data="data" chart-labels="labels" chart-options="options">
+          </canvas>
+          <span
+            style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">{{data[0]}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <div class="text-center item range range-positive">
+          <input type="range" name="duration" min="0" max="60" ng-model="data[0]" ng-change="drag(data[0])">
+        </div>
+      </div>
+    </div>
+    <button ng-if="!isRunning && !isPaused"
+            ng-click="startTimer()"
+            class="button button-block button-positive">
+      Empezar
+    </button>
+    <button ng-if="isRunning && !isPaused"
+            ng-click="pauseOrResumeTimer()"
+            class="button button-block button-calm">
+      Pausar
+    </button>
+    <button ng-if="!isRunning && isPaused"
+            ng-click="pauseOrResumeTimer()"
+            class="button button-block button-balanced">
+      Continuar
+    </button>
+    <button ng-if="isRunning"
+            ng-click="stopTimer()"
+            class="button button-block button-assertive">
+      Parar
+    </button>
+  </ion-content>
+</ion-view>

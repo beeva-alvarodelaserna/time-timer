@@ -1,0 +1,14 @@
+<ion-view view-title="Home">
+  <ion-content>
+    <div class="row">
+      <div class="col">
+        <div class="text-center">
+          <h1 style="text-align: center;">Time Timer</h1>
+        </div>
+      </div>
+    </div>
+    <button ng-repeat="session in sessions" ng-click="showSession(session.id)" class="button button-block button-positive waves-effect waves-button waves-light activated">
+      {{session.title}}
+    </button>
+  </ion-content>
+</ion-view>
