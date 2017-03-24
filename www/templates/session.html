@@ -8,21 +8,25 @@
             </div>
             <div class="row">
                 <div class="col">
-                    <i style="display: inline-block; font-size: x-large" class="icon ion-minus-circled" ng-click="decrementSteps()"></i>
+                    <i style="display: inline-block; font-size: x-large" class="icon ion-minus-circled"
+                       ng-click="decrementSteps()"></i>
                 </div>
                 <div class="col">
                     <span style="display: inline-block; text-align: center">{{numberOfSteps}}</span>
                 </div>
                 <div class="col">
-                    <i style="display: inline-block; font-size: x-large" class="icon ion-plus-circled" ng-click="incrementSteps()"></i>
+                    <i style="display: inline-block; font-size: x-large" class="icon ion-plus-circled"
+                       ng-click="incrementSteps()"></i>
                 </div>
             </div>
         </div>
-        <div class="row">
+        <div class="row"
+             style="background: url('../img/group.png') no-repeat center;padding-top: 20%;
+             padding-bottom: 20%;">
             <div class="col">
                 <div class="text-center">
                     <canvas id="pie" class="chart chart-pie"
-                            chart-data="data" chart-labels="labels" chart-options="pieOptions">
+                            chart-data="data" chart-labels="labels" chart-options="pieOptions" chart-colours="colours">
                     </canvas>
                 </div>
             </div>
@@ -38,15 +42,18 @@
         </div>
         <div class="row" ng-if="isMultiple" ng-hide="isRunning || isPaused">
             <div class="col">
-                <div class="text-center item range range-positive" ng-repeat="i in range(numberOfSteps) track by $index">
-                    <input type="range" name="duration" min="0" max="60" ng-model="data[$index]" ng-change="dragIndex()">
+                <div class="text-center item range range-positive"
+                     ng-repeat="i in range(numberOfSteps) track by $index">
+                    <input type="range" name="duration" min="0" max="60" ng-model="data[$index]"
+                           ng-change="dragIndex()">
                     <span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">{{data[$index]}}</span>
                 </div>
             </div>
         </div>
         <button ng-if="data[0] > 0 && !isRunning && !isPaused"
                 ng-click="startTimer()"
-                class="button button-block button-positive">
+                class="button button-block button-positive"
+                style="background-color: #ffd71f; font-weight: bold">
             Empezar
         </button>
         <button ng-if="isRunning && !isPaused"
