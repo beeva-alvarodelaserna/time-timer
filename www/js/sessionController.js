@@ -6,8 +6,6 @@ angular.module('session.controllers', ['chart.js'])
         let remainingTime = 60;
         let nonEmptyIndex = 0;
 
-        console.log($stateParams);
-
         $scope.sessionType = $stateParams.sessionId;
         $scope.isMultiple = $stateParams.sessionId !== '0';
         $scope.isRunning = false;
@@ -16,6 +14,14 @@ angular.module('session.controllers', ['chart.js'])
         let currentValue = 0;
         $scope.data;
         $scope.labels;
+        $scope.pieOptions = {
+            tooltipEvents: [],
+            showTooltips: true,
+            tooltipCaretSize: 0,
+            onAnimationComplete: function () {
+                this.showTooltip(this.segments, true);
+            }
+        };
 
         $scope.init = function () {
             if ($scope.isMultiple) {

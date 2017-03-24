@@ -1,6 +1,6 @@
 <ion-view view-title="Sesión {{sessionType === '0' ? 'simple' : 'multi parte'}}" ng-init="init()">
     <ion-content>
-        <div ng-if="isMultiple" style="width: 100%" class="text-center">
+        <div ng-if="isMultiple && !isRunning" style="width: 100%" class="text-center">
             <div class="row text-center">
                 <div class="text-center">
                     Número de partes
@@ -22,7 +22,7 @@
             <div class="col">
                 <div class="text-center">
                     <canvas id="pie" class="chart chart-pie"
-                            chart-data="data" chart-labels="labels" chart-options="options">
+                            chart-data="data" chart-labels="labels" chart-options="pieOptions">
                     </canvas>
                 </div>
             </div>

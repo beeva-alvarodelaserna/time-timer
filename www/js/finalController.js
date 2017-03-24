@@ -3,8 +3,6 @@ angular.module('final.controllers', [])
 
         $scope.message;
 
-        console.log($stateParams);
-
         $scope.parseResult = function() {
             switch ($stateParams.optionId) {
                 case '1':
