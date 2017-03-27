@@ -11,10 +11,11 @@ angular.module('starter.controllers', [])
     ];
 
     $scope.showSession = function (sessionId) {
-      if (sessionId === 0) {
-          $state.go('app.sessionConfig');
-      } else {
-          $state.go('app.session', {sessionId: sessionId});
-      }
+      // if (sessionId === 0) {
+      //     $state.go('app.sessionConfig');
+      // } else {
+      //     $state.go('app.session', {sessionId: sessionId});
+      // }
+      $state.go('app.session', {sessionId: sessionId});
     }
   });

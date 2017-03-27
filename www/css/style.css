@@ -46,3 +46,7 @@
     font-weight:bold;
     text-decoration:none;
 }
+
+.red-background {
+    background-color: #ffd71f;
+}

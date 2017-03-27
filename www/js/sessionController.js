@@ -86,34 +86,34 @@ angular.module('session.controllers', ['chart.js'])
         };
 
         $scope.startTimer = function () {
-            // $state.go('app.sessionFill', {sessionId: $stateParams.sessionId, duration: $scope.data.join(',')});
-            $scope.isRunning = true;
-            $scope.isPaused = false;
-            if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] == 0) {
-                nonEmptyIndex++;
-                if (nonEmptyIndex < $scope.data.length - 1) {
-                    $scope.stopTimer();
-                    $scope.startTimer();
-                } else {
-                    $scope.stopTimer();
-                    $scope.finishSessionAndGoToSurvey();
-                }
-            } else {
-                timer = setInterval(function () {
-                    if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] > 0) {
-                        $scope.data[nonEmptyIndex]--;
-                        currentValue = $scope.data[nonEmptyIndex];
-                        if (nonEmptyIndex == 0) {
-                            $scope.drag($scope.data[nonEmptyIndex]);
-                        } else {
-                            $scope.dragIndex(nonEmptyIndex, $scope.data[nonEmptyIndex]);
-                        }
-                        $scope.$apply();
-                    } else {
-                        $scope.startTimer();
-                    }
-                }, 1000);
-            }
+            $state.go('app.sessionFill', {sessionId: $stateParams.sessionId, duration: $scope.data.join(',')});
+            // $scope.isRunning = true;
+            // $scope.isPaused = false;
+            // if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] == 0) {
+            //     nonEmptyIndex++;
+            //     if (nonEmptyIndex < $scope.data.length - 1) {
+            //         $scope.stopTimer();
+            //         $scope.startTimer();
+            //     } else {
+            //         $scope.stopTimer();
+            //         $scope.finishSessionAndGoToSurvey();
+            //     }
+            // } else {
+            //     timer = setInterval(function () {
+            //         if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] > 0) {
+            //             $scope.data[nonEmptyIndex]--;
+            //             currentValue = $scope.data[nonEmptyIndex];
+            //             if (nonEmptyIndex == 0) {
+            //                 $scope.drag($scope.data[nonEmptyIndex]);
+            //             } else {
+            //                 $scope.dragIndex(nonEmptyIndex, $scope.data[nonEmptyIndex]);
+            //             }
+            //             $scope.$apply();
+            //         } else {
+            //             $scope.startTimer();
+            //         }
+            //     }, 1000);
+            // }
         };
 
         $scope.finishSessionAndGoToSurvey = function () {

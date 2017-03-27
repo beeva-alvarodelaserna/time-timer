@@ -2,10 +2,10 @@ angular.module('session.controllers')
     .controller('SessionFillCtrl', function ($scope, $stateParams, $ionicHistory, $ionicPopup, $state) {
         var timer;
 
-        const maxTime = 60;
+        let increment = 0;
         let nonEmptyIndex = 0;
 
-        $scope.myHeight = 90;
+        $scope.myHeight = 0;
 
         $scope.sessionType = $stateParams.sessionId;
         $scope.isMultiple = $stateParams.sessionId !== '0';
@@ -13,9 +13,10 @@ angular.module('session.controllers')
         $scope.isPaused = false;
         $scope.numberOfSteps = 2;
         $scope.percentages = [];
+        $scope.increments = [];
         $scope.cleanData;
         const colors = [
-            '#ff9f8f',
+            '#ebebeb',
             '#aa9ada',
             '#119bdb',
             '#d49aaa',
@@ -51,7 +52,9 @@ angular.module('session.controllers')
                sum += parseInt(item, 10);
             });
             $scope.data.forEach(item => {
-                result.push(item*100/sum);
+                let value = item*100/sum;
+                result.push(value);
+                $scope.increments.push(1/item);
             });
             return result;
         };
@@ -59,10 +62,10 @@ angular.module('session.controllers')
         $scope.startTimer = function () {
             $scope.isRunning = true;
             $scope.isPaused = false;
-            if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] == 0) {
-                nonEmptyIndex++;
-                if (nonEmptyIndex < $scope.data.length - 1) {
+            if (angular.isDefined($scope.cleanData[nonEmptyIndex]) && $scope.cleanData[nonEmptyIndex] == 0) {
+                if (nonEmptyIndex < $scope.cleanData.length - 1) {
                     $scope.stopTimer();
+                    nonEmptyIndex++;
                     $scope.startTimer();
                 } else {
                     $scope.stopTimer();
@@ -70,11 +73,12 @@ angular.module('session.controllers')
                 }
             } else {
                 timer = setInterval(function () {
-                    if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] > 0) {
-                        $scope.data[nonEmptyIndex]--;
+                    if (angular.isDefined($scope.cleanData[nonEmptyIndex]) && $scope.cleanData[nonEmptyIndex] > 0) {
+                        $scope.cleanData[nonEmptyIndex]--;
+                        console.log($scope.cleanData[nonEmptyIndex]);
                         $scope.percentages = obtainPercentages();
-                        $scope.myHeight = Math.floor($scope.percentages[nonEmptyIndex]*100/60);
-                        console.log('myHeight', $scope.myHeight);
+                        // $scope.myHeight = 100 - Math.floor($scope.percentages[nonEmptyIndex]*100/60);
+                        $scope.myHeight += $scope.increments[nonEmptyIndex]*100;
                         $scope.updateStyle();
                         $scope.$apply();
                     } else {
@@ -105,9 +109,6 @@ angular.module('session.controllers')
 
         $scope.stopTimer = function () {
             clearInterval(timer);
-            $scope.init();
-            $scope.isRunning = false;
-            $scope.isPaused = false;
         };
 
         $scope.goBack = function () {

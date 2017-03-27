@@ -1,9 +1,9 @@
-<ion-view ng-init="init()">
+<ion-view ng-init="init()" view-title="Sesión {{sessionType === '0' ? 'simple' : 'multi parte'}}">
     <ion-content class="container">
-        <div class="time-progress">
-        <div class="row" ng-style="myStyle" ng-repeat="session in cleanData">
+        <div class="time-progress red-background">
+            <div class="row" ng-style="myStyle" ng-repeat="session in cleanData">
 
-        </div>
+            </div>
         </div>
         <div class="row buttons-container">
             <button ng-if="isRunning && !isPaused"
