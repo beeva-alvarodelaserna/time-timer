@@ -11,6 +11,7 @@ angular.module('session.controllers')
         $scope.isMultiple = $stateParams.sessionId !== '0';
         $scope.isRunning = false;
         $scope.isPaused = false;
+        $scope.isDragging = false;
         $scope.numberOfSteps = 2;
         $scope.percentages = [];
         $scope.increments = [];
@@ -24,7 +25,7 @@ angular.module('session.controllers')
             '#9a9aaa'
         ];
 
-        $scope.updateStyle = function() {
+        $scope.updateStyle = function () {
             $scope.myStyle = {
                 'width': '100%',
                 'height': $scope.myHeight + '%',
@@ -34,14 +35,42 @@ angular.module('session.controllers')
 
         $scope.init = function () {
             $scope.data = $stateParams.duration.split(',');
+            parseData();
+            if (!$scope.isRunning) {
+                $scope.startTimer();
+            }
+        };
+
+        const parseData = function () {
             $scope.cleanData = [];
             for (let i = 0; i < $scope.data.length - 1; i++) {
                 $scope.cleanData.push($scope.data[i]);
             }
             $scope.percentages = obtainPercentages();
             $scope.updateStyle();
-            if (!$scope.isRunning) {
-                $scope.startTimer();
+        };
+
+        $scope.onDragUp = function () {
+            $scope.isDragging = true;
+            $scope.stopTimer();
+            if ($scope.data[nonEmptyIndex] < 60) {
+                $scope.data[nonEmptyIndex]++;
+            }
+            parseData();
+            if ($scope.myHeight > 0) {
+                $scope.myHeight -= $scope.increments[nonEmptyIndex] * 100;
+            }
+        };
+
+        $scope.onDragDown = function () {
+            $scope.isDragging = true;
+            $scope.stopTimer();
+            if ($scope.data[nonEmptyIndex] > 0) {
+                $scope.data[nonEmptyIndex]--;
+            }
+            parseData();
+            if ($scope.myHeight < 100) {
+                $scope.myHeight += $scope.increments[nonEmptyIndex] * 100;
             }
         };
 
@@ -49,42 +78,45 @@ angular.module('session.controllers')
             let sum = 0;
             let result = [];
             $scope.data.forEach(item => {
-               sum += parseInt(item, 10);
+                sum += parseInt(item, 10);
             });
             $scope.data.forEach(item => {
-                let value = item*100/sum;
+                let value = item * 100 / sum;
                 result.push(value);
-                $scope.increments.push(1/item);
+                $scope.increments.push(1 / item);
             });
             return result;
         };
 
         $scope.startTimer = function () {
-            $scope.isRunning = true;
-            $scope.isPaused = false;
-            if (angular.isDefined($scope.cleanData[nonEmptyIndex]) && $scope.cleanData[nonEmptyIndex] == 0) {
-                if (nonEmptyIndex < $scope.cleanData.length - 1) {
-                    $scope.stopTimer();
-                    nonEmptyIndex++;
-                    $scope.startTimer();
+            if (!$scope.isDragging) {
+                $scope.isRunning = true;
+                $scope.isPaused = false;
+                if (angular.isDefined($scope.cleanData[nonEmptyIndex]) && $scope.cleanData[nonEmptyIndex] == 0) {
+                    if (nonEmptyIndex < $scope.cleanData.length - 1) {
+                        $scope.stopTimer();
+                        nonEmptyIndex++;
+                        $scope.startTimer();
+                    } else {
+                        $scope.stopTimer();
+                        $scope.finishSessionAndGoToSurvey();
+                    }
                 } else {
-                    $scope.stopTimer();
-                    $scope.finishSessionAndGoToSurvey();
+                    timer = setInterval(function () {
+                        if (angular.isDefined($scope.cleanData[nonEmptyIndex]) && $scope.cleanData[nonEmptyIndex] > 0) {
+                            $scope.cleanData[nonEmptyIndex]--;
+                            $scope.percentages = obtainPercentages();
+                            // $scope.myHeight = 100 - Math.floor($scope.percentages[nonEmptyIndex]*100/60);
+                            $scope.myHeight += $scope.increments[nonEmptyIndex] * 100;
+                            $scope.updateStyle();
+                            $scope.$apply();
+                        } else {
+                            $scope.startTimer();
+                        }
+                    }, 1000);
                 }
             } else {
-                timer = setInterval(function () {
-                    if (angular.isDefined($scope.cleanData[nonEmptyIndex]) && $scope.cleanData[nonEmptyIndex] > 0) {
-                        $scope.cleanData[nonEmptyIndex]--;
-                        console.log($scope.cleanData[nonEmptyIndex]);
-                        $scope.percentages = obtainPercentages();
-                        // $scope.myHeight = 100 - Math.floor($scope.percentages[nonEmptyIndex]*100/60);
-                        $scope.myHeight += $scope.increments[nonEmptyIndex]*100;
-                        $scope.updateStyle();
-                        $scope.$apply();
-                    } else {
-                        $scope.startTimer();
-                    }
-                }, 1000);
+                $scope.stopTimer();
             }
         };
 
@@ -105,13 +137,18 @@ angular.module('session.controllers')
                 $scope.isPaused = true;
                 clearInterval(timer);
             }
+            $scope.isDragging = false;
         };
 
         $scope.stopTimer = function () {
             clearInterval(timer);
+            $scope.isRunning = false;
+            $scope.isPaused = true;
+            $scope.isDragging = false;
         };
 
         $scope.goBack = function () {
             $ionicHistory.goBack();
+            clearInterval(timer);
         };
     });

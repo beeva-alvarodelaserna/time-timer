@@ -1,8 +1,8 @@
 <ion-view ng-init="init()" view-title="Sesión {{sessionType === '0' ? 'simple' : 'multi parte'}}">
     <ion-content class="container">
-        <div class="time-progress red-background">
+        <div class="time-progress red-background" on-drag-up="onDragUp()" on-drag-down="onDragDown()">
             <div class="row" ng-style="myStyle" ng-repeat="session in cleanData">
-
+                <span class="text-center" style="width: 100%; font-weight: bold; font-size: large">{{session}}</span>
             </div>
         </div>
         <div class="row buttons-container">
