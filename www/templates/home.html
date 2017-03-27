@@ -9,7 +9,14 @@
                     </div>
                 </div>
             </div>
-            <div style="position:relative;top: 25%">
+            <div class="row" style="position:relative;top: 25%; text-align: center">
+                <div class="col round-button" style="display: flex" ng-repeat="session in sessions" ng-click="showSession(session.id)">
+                    <div class="round-button-circle">
+                        <a class="round-button">{{session.title}}</a>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <button ng-repeat="session in sessions" ng-click="showSession(session.id)"
                         class="button button-block waves-effect waves-button waves-light activated"
                         style="background-color: #ffd71f; font-weight: bold">

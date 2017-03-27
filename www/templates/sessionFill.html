@@ -1,9 +1,11 @@
 <ion-view ng-init="init()">
     <ion-content class="container">
+        <div class="time-progress">
         <div class="row" ng-style="myStyle" ng-repeat="session in cleanData">
 
         </div>
-        <div class="row">
+        </div>
+        <div class="row buttons-container">
             <button ng-if="isRunning && !isPaused"
                     ng-click="pauseOrResumeTimer()"
                     class="button button-block button-calm">
