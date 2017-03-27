@@ -32,6 +32,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'session.controllers'
         controller: 'AppCtrl'
       })
 
+        .state('app.home', {
+            url: '/home',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/home.html',
+                    controller: 'HomeCtrl'
+                }
+            }
+        })
+
       .state('app.session', {
         url: '/sessions/:sessionId',
         views: {
@@ -42,12 +52,12 @@ angular.module('starter', ['ionic', 'starter.controllers', 'session.controllers'
         }
       })
 
-      .state('app.home', {
-        url: '/home',
+      .state('app.sessionFill', {
+        url: '/fill/sessions/:sessionId/:duration',
         views: {
           'menuContent': {
-            templateUrl: 'templates/home.html',
-            controller: 'HomeCtrl'
+            templateUrl: 'templates/sessionFill.html',
+            controller: 'SessionFillCtrl'
           }
         }
       })

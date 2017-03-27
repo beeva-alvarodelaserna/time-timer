@@ -6,6 +6,13 @@ angular.module('session.controllers', ['chart.js'])
         let remainingTime = 60;
         let nonEmptyIndex = 0;
 
+        $scope.myHeight = 100;
+        $scope.myStyle = {
+            'width': '100%',
+            'height': $scope.myHeight,
+            'background-color': '#ff9f8f'
+        };
+
         $scope.sessionType = $stateParams.sessionId;
         $scope.isMultiple = $stateParams.sessionId !== '0';
         $scope.isRunning = false;
@@ -75,33 +82,34 @@ angular.module('session.controllers', ['chart.js'])
         };
 
         $scope.startTimer = function () {
-            $scope.isRunning = true;
-            $scope.isPaused = false;
-            if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] == 0) {
-                nonEmptyIndex++;
-                if (nonEmptyIndex < $scope.data.length - 1) {
-                    $scope.stopTimer();
-                    $scope.startTimer();
-                } else {
-                    $scope.stopTimer();
-                    $scope.finishSessionAndGoToSurvey();
-                }
-            } else {
-                timer = setInterval(function () {
-                    if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] > 0) {
-                        $scope.data[nonEmptyIndex]--;
-                        currentValue = $scope.data[nonEmptyIndex];
-                        if (nonEmptyIndex == 0) {
-                            $scope.drag($scope.data[nonEmptyIndex]);
-                        } else {
-                            $scope.dragIndex(nonEmptyIndex, $scope.data[nonEmptyIndex]);
-                        }
-                        $scope.$apply();
-                    } else {
-                        $scope.startTimer();
-                    }
-                }, 1000);
-            }
+            $state.go('app.sessionFill', {sessionId: $stateParams.sessionId, duration: $scope.data.join(',')});
+            // $scope.isRunning = true;
+            // $scope.isPaused = false;
+            // if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] == 0) {
+            //     nonEmptyIndex++;
+            //     if (nonEmptyIndex < $scope.data.length - 1) {
+            //         $scope.stopTimer();
+            //         $scope.startTimer();
+            //     } else {
+            //         $scope.stopTimer();
+            //         $scope.finishSessionAndGoToSurvey();
+            //     }
+            // } else {
+            //     timer = setInterval(function () {
+            //         if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] > 0) {
+            //             $scope.data[nonEmptyIndex]--;
+            //             currentValue = $scope.data[nonEmptyIndex];
+            //             if (nonEmptyIndex == 0) {
+            //                 $scope.drag($scope.data[nonEmptyIndex]);
+            //             } else {
+            //                 $scope.dragIndex(nonEmptyIndex, $scope.data[nonEmptyIndex]);
+            //             }
+            //             $scope.$apply();
+            //         } else {
+            //             $scope.startTimer();
+            //         }
+            //     }, 1000);
+            // }
         };
 
         $scope.finishSessionAndGoToSurvey = function () {
@@ -125,6 +133,7 @@ angular.module('session.controllers', ['chart.js'])
 
         $scope.stopTimer = function () {
             clearInterval(timer);
+            $scope.init();
             $scope.isRunning = false;
             $scope.isPaused = false;
         };

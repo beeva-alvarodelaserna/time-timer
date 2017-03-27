@@ -1,5 +1,5 @@
 <ion-view view-title="Sesión {{sessionType === '0' ? 'simple' : 'multi parte'}}" ng-init="init()">
-    <ion-content>
+    <ion-content class="container">
         <div ng-if="isMultiple && !isRunning" style="width: 100%" class="text-center">
             <div class="row text-center">
                 <div class="text-center">
@@ -26,13 +26,13 @@
             <div class="col">
                 <div class="text-center">
                     <canvas id="pie" class="chart chart-pie"
-                            chart-data="data" chart-labels="labels" chart-options="pieOptions" chart-colours="colours">
+                            chart-data="data" chart-labels="labels" chart-options="pieOptions">
                     </canvas>
                 </div>
             </div>
         </div>
 
-        <div class="row" ng-if="!isMultiple" ng-hide="isRunning || isPaused">
+        <div class="row" ng-if="!isMultiple">
             <div class="col">
                 <div class="text-center item range range-positive">
                     <input type="range" name="duration" min="0" max="60" ng-model="data[0]" ng-change="drag(data[0])">

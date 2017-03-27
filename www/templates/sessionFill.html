@@ -1,0 +1,24 @@
+<ion-view ng-init="init()">
+    <ion-content class="container">
+        <div class="row" ng-style="myStyle" ng-repeat="session in cleanData">
+
+        </div>
+        <div class="row">
+            <button ng-if="isRunning && !isPaused"
+                    ng-click="pauseOrResumeTimer()"
+                    class="button button-block button-calm">
+                Pausar
+            </button>
+            <button ng-if="!isRunning && isPaused"
+                    ng-click="pauseOrResumeTimer()"
+                    class="button button-block button-balanced">
+                Continuar
+            </button>
+            <button ng-if="isRunning"
+                    ng-click="stopTimer()"
+                    class="button button-block button-assertive">
+                Parar
+            </button>
+        </div>
+    </ion-content>
+</ion-view>
