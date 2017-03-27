@@ -36,6 +36,10 @@ angular.module('session.controllers', ['chart.js'])
             } else {
                 $scope.data = [0, maxTime];
             }
+            if (angular.isDefined($stateParams.duration) && $stateParams.duration > 0) {
+                $scope.data[0] = $stateParams.duration;
+                $scope.drag($stateParams.duration);
+            }
             $scope.generateLabels();
         };
 

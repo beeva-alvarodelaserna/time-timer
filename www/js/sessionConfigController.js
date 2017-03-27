@@ -22,4 +22,12 @@ angular.module('session.controllers')
                 duration: 0
             }
         ];
+
+        $scope.showSession = function (duration) {
+            if (duration === 0) {
+                $state.go('app.session', {sessionId: 0});
+            } else {
+                $state.go('app.session', {sessionId: 0, duration: duration});
+            }
+        }
     });

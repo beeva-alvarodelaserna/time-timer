@@ -53,7 +53,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'session.controllers'
             })
 
             .state('app.session', {
-                url: '/sessions/:sessionId',
+                url: '/sessions/:sessionId/:duration',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/session.html',
