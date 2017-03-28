@@ -121,12 +121,13 @@ angular.module('session.controllers', ['chart.js'])
         };
 
         $scope.finishSessionAndGoToSurvey = function () {
-            $ionicPopup.alert({
-                title: 'Se acabó',
-                content: '¡Reunión finalizada!'
-            }).then(function () {
-                $state.go('app.survey');
-            });
+            // $ionicPopup.alert({
+            //     title: 'Se acabó',
+            //     content: '¡Reunión finalizada!'
+            // }).then(function () {
+            //     $state.go('app.survey');
+            // });
+            $state.go('app.finished');
         };
 
         $scope.pauseOrResumeTimer = function () {

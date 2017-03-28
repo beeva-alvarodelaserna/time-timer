@@ -92,6 +92,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'session.controllers'
                 }
             })
 
+            .state('app.finished', {
+                url: '/finished',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/finished.html',
+                        controller: 'FinishedCtrl'
+                    }
+                }
+            })
+
             .state('app.survey', {
                 url: '/survey',
                 views: {
