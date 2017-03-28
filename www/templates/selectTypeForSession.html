@@ -1,0 +1,21 @@
+<ion-view view-title="Versions">
+    <ion-content class="container">
+        <div class="row" style="margin-top: 20%">
+            <div class="col">
+                <div class="text-center">
+                    <h3>Select the version</h3>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" style="position:relative;left: 35%; text-align: center;margin-bottom: 10px;" ng-repeat="version in versionTypes[sessionType]"
+             ng-click="goToVersion(version.id)">
+            <div class="round-button">
+                <div class="round-button-circle">
+                    <a class="round-button">{{version.id + 1}}</a>
+                </div>
+            </div>
+        </div>
+
+    </ion-content>
+</ion-view>

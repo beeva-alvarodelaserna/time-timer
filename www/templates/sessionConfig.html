@@ -1,9 +1,9 @@
 <ion-view view-title="Choose duration">
     <ion-content class="container">
-        <div>
-            <div class="row round-button" style="margin-bottom: 15px; display: block; text-align: center" ng-repeat="session in predefinedSessions"
-                 ng-click="showSession(session.duration)">
-                <div class="round-button-circle" style="float: none; margin: 0 auto;">
+        <div class="row" style="text-align: center;margin-bottom: 15px" ng-repeat="session in predefinedSessions">
+            <div class="round-button" style="display:inline-block;" ng-style="session.style"
+                 ng-click="goToSimpleSession(session.duration)">
+                <div class="round-button-circle">
                     <a class="round-button" ng-if="session.duration > 0">{{session.duration}}'</a>
                     <a class="round-button" ng-if="session.duration == 0"><i class="icon ion-android-add"></i></a>
                 </div>

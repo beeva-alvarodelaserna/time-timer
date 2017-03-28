@@ -3,17 +3,20 @@
         <div class="row" style="margin-top: 20%">
             <div class="col">
                 <div class="text-center">
-                    <img src="../img/page1.png">
-                    <h4>Really efficient meetings</h4>
+                    <h3>Select the session type</h3>
                 </div>
             </div>
         </div>
-        <div class="row" style="position: absolute; bottom: 150px; width: 100%" ng-click="goToSelectSession()">
-            <div class="round-button" style="text-align: center; margin-left: 40%">
+
+
+        <div class="row" style="position:relative;left: 35%; text-align: center;margin-bottom: 10px;" ng-repeat="session in sessions"
+             ng-click="showVersions(session.id)">
+            <div class="round-button">
                 <div class="round-button-circle">
-                    <a class="round-button">GO</a>
+                    <a class="round-button">{{session.title}}</a>
                 </div>
             </div>
         </div>
+
     </ion-content>
 </ion-view>

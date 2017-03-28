@@ -7,27 +7,48 @@ angular.module('session.controllers')
 
         $scope.predefinedSessions = [
             {
-                duration: 15
+                duration: 15,
+                style: {
+                    'margin-top': '5%',
+                    'margin-left': '30%',
+                    'width': '50px'
+                }
             },
             {
-                duration: 30
+                duration: 30,
+                style: {
+                    'margin-left': '45%',
+                    'width': '75px'
+                }
             },
             {
-                duration: 45
+                duration: 45,
+                style: {
+                    'margin-left': '50%',
+                    'width': '100px'
+                }
             },
             {
-                duration: 60
+                duration: 60,
+                style: {
+                    'margin-left': '45%',
+                    'width': '125px'
+                }
             },
             {
-                duration: 0
+                duration: 0,
+                style: {
+                    'margin-left': '25%',
+                    'width': '75px'
+                }
             }
         ];
 
-        $scope.showSession = function (duration) {
+        $scope.goToSimpleSession = function (duration) {
             if (duration === 0) {
-                $state.go('app.session', {sessionId: 0});
+                $state.go('app.session', {sessionId: 0, versionId: $stateParams.versionId});
             } else {
-                $state.go('app.session', {sessionId: 0, duration: duration});
+                $state.go('app.session', {sessionId: 0, versionId: $stateParams.versionId, duration: duration});
             }
         }
     });

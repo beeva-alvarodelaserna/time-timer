@@ -42,8 +42,28 @@ angular.module('starter', ['ionic', 'starter.controllers', 'session.controllers'
                 }
             })
 
+            .state('app.selectSession', {
+                url: '/select-session',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/selectSession.html',
+                        controller: 'SelectSessionCtrl'
+                    }
+                }
+            })
+
+            .state('app.selectTypeForSession', {
+                url: '/session/:sessionType/versions',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/selectTypeForSession.html',
+                        controller: 'SelectTypeForSessionCtrl'
+                    }
+                }
+            })
+
             .state('app.sessionConfig', {
-                url: '/config/session',
+                url: '/config/session/:versionId',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/sessionConfig.html',
@@ -53,7 +73,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'session.controllers'
             })
 
             .state('app.session', {
-                url: '/sessions/:sessionId/:duration',
+                url: '/sessions/:sessionId/:versionId/:duration',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/session.html',
@@ -63,7 +83,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'session.controllers'
             })
 
             .state('app.sessionFill', {
-                url: '/fill/sessions/:sessionId/:duration',
+                url: '/fill/sessions/:sessionId/:versionId/:duration',
                 views: {
                     'menuContent': {
                         templateUrl: 'templates/sessionFill.html',

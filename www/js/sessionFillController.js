@@ -1,8 +1,7 @@
 angular.module('session.controllers')
-    .controller('SessionFillCtrl', function ($scope, $stateParams, $ionicHistory, $ionicPopup, $state) {
-        var timer;
+    .controller('SessionFillCtrl', function ($scope, $stateParams, $ionicHistory, $ionicPopup, $state, $rootScope) {
 
-        let increment = 0;
+        var timer;
         let nonEmptyIndex = 0;
 
         $scope.myHeight = 0;
@@ -106,7 +105,6 @@ angular.module('session.controllers')
                         if (angular.isDefined($scope.cleanData[nonEmptyIndex]) && $scope.cleanData[nonEmptyIndex] > 0) {
                             $scope.cleanData[nonEmptyIndex]--;
                             $scope.percentages = obtainPercentages();
-                            // $scope.myHeight = 100 - Math.floor($scope.percentages[nonEmptyIndex]*100/60);
                             $scope.myHeight += $scope.increments[nonEmptyIndex] * 100;
                             $scope.updateStyle();
                             $scope.$apply();
@@ -149,6 +147,10 @@ angular.module('session.controllers')
 
         $scope.goBack = function () {
             $ionicHistory.goBack();
-            clearInterval(timer);
+            $scope.stopTimer();
+        };
+
+        $rootScope.$ionicGoBack = function() {
+            $scope.goBack();
         };
     });
