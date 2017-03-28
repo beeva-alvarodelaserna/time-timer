@@ -1,9 +1,13 @@
-<ion-view view-title="Finished">
+<ion-view view-title="Finished" ng-init="playAlarm()">
     <ion-content class="dark-yellow-container">
-        <h1 style="width: 100%; text-align: center">Well done</h1>
+        <audio id="background_audio" autoplay ng-if="loaded" ng-hide="loaded">
+            <source src="../audio/alarm.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <h1 style="width: 100%; text-align: center;margin-top: 10%;">Well done</h1>
         <h4 style="width: 100%; text-align: center">The meeting is over</h4>
-        <div class="concentric-circles" style="text-align: center;margin-top: 50%" ng-click="goToSurvey()">
-            <div style="display: inline-block;margin: auto;margin-top: 30px">Stop</div>
+        <div class="concentric-circles" style="text-align: center;margin-top: 40%" ng-click="goToSurvey()">
+            <div style="display: inline-block;margin: auto;margin-top: 40%">Stop</div>
         </div>
     </ion-content>
 </ion-view>
