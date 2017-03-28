@@ -88,22 +88,15 @@ angular.module('session.controllers', ['chart.js'])
         };
 
         $scope.startTimer = function () {
-            console.log('$scope.data', $scope.data);
-            console.log('startTimer');
             if ($scope.isPie) {
-                console.log('isPie');
                 $scope.isRunning = true;
                 $scope.isPaused = false;
-                console.log('nonEmptyIndex', nonEmptyIndex);
-                console.log('$scope.data[nonEmptyIndex]', $scope.data[nonEmptyIndex]);
                 if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] == 0) {
                     nonEmptyIndex++;
                     if (nonEmptyIndex < $scope.data.length - 1) {
-                        console.log('stopTimer');
                         $scope.stopTimer();
                         $scope.startTimer();
                     } else {
-                        console.log('stopTimer and finish');
                         $scope.stopTimer();
                         $scope.finishSessionAndGoToSurvey();
                     }
@@ -111,13 +104,9 @@ angular.module('session.controllers', ['chart.js'])
                     timer = setInterval(function () {
                         if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] > 0) {
                             $scope.data[nonEmptyIndex]--;
-                            console.log('nonEmptyIndex', nonEmptyIndex);
-                            console.log('$scope.data', $scope.data);
                             if (nonEmptyIndex == 0) {
-                                console.log('drag');
                                 $scope.drag($scope.data[nonEmptyIndex]);
                             } else {
-                                console.log('dragIndex');
                                 $scope.dragIndex(nonEmptyIndex, $scope.data[nonEmptyIndex]);
                             }
                             $scope.$apply();
@@ -127,7 +116,7 @@ angular.module('session.controllers', ['chart.js'])
                     }, 1000);
                 }
             } else {
-                $state.go('app.sessionFill', {sessionId: $stateParams.sessionId, duration: $scope.data.join(',')});
+                $state.go('app.sessionFill', {sessionId: $stateParams.sessionId, versionId: $stateParams.versionId, duration: $scope.data.join(',')});
             }
         };
 

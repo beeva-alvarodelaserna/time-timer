@@ -24,11 +24,27 @@ angular.module('session.controllers')
             '#9a9aaa'
         ];
 
+        $scope.boxHeight;
+        $scope.box;
+
+        $scope.movingTop = -100;
+
+        $scope.moveInToPlace;
+        $scope.remaining;
+
         $scope.updateStyle = function () {
-            $scope.myStyle = {
+            // $scope.myStyle = {
+            //     'width': '100%',
+            //     'height': $scope.myHeight + '%',
+            //     'background-color': colors[nonEmptyIndex]
+            // };
+            $scope.moveInToPlace = {
+                'position': 'absolute',
+                'top': $scope.movingTop + '%',
+                'height': '100%',
                 'width': '100%',
-                'height': $scope.myHeight + '%',
-                'background-color': colors[nonEmptyIndex]
+                'background': '#ebebeb',
+                'opacity': '1'
             };
         };
 
@@ -46,48 +62,75 @@ angular.module('session.controllers')
                 $scope.cleanData.push($scope.data[i]);
             }
             $scope.percentages = obtainPercentages();
+            $scope.boxHeight = obtainBoxHeights();
+            $scope.box = [];
+            $scope.boxHeight.forEach(height => {
+                $scope.box.push({
+                    'position': 'relative',
+                    'width': '100%',
+                    'height': height + '%',
+                    'overflow': 'hidden',
+                    'border': 'black solid 1px',
+                    'background': '#ffd71f'
+                });
+            });
             $scope.updateStyle();
         };
 
-        $scope.onDragUp = function () {
-            $scope.isDragging = true;
-            $scope.stopTimer();
-            if ($scope.data[nonEmptyIndex] < 60) {
-                $scope.data[nonEmptyIndex]++;
+        const obtainBoxHeights = function () {
+            let result = [];
+            if ($scope.cleanData.length === 1) {
+                result.push(100);
+            } else {
+                $scope.percentages.forEach(item => {
+                    result.push(item);
+                });
             }
-            parseData();
-            if ($scope.myHeight > 0) {
-                $scope.myHeight -= $scope.increments[nonEmptyIndex] * 100;
-            }
+            return result;
         };
 
-        $scope.onDragDown = function () {
-            $scope.isDragging = true;
-            $scope.stopTimer();
-            if ($scope.data[nonEmptyIndex] > 0) {
-                $scope.data[nonEmptyIndex]--;
-            }
-            parseData();
-            if ($scope.myHeight < 100) {
-                $scope.myHeight += $scope.increments[nonEmptyIndex] * 100;
-            }
-        };
+        // $scope.onDragUp = function () {
+        //     $scope.isDragging = true;
+        //     $scope.stopTimer();
+        //     if ($scope.data[nonEmptyIndex] < 60) {
+        //         $scope.data[nonEmptyIndex]++;
+        //     }
+        //     parseData();
+        //     if ($scope.myHeight > 0) {
+        //         $scope.myHeight -= $scope.increments[nonEmptyIndex] * 100;
+        //     }
+        // };
+        //
+        // $scope.onDragDown = function () {
+        //     $scope.isDragging = true;
+        //     $scope.stopTimer();
+        //     if ($scope.data[nonEmptyIndex] > 0) {
+        //         $scope.data[nonEmptyIndex]--;
+        //     }
+        //     parseData();
+        //     if ($scope.myHeight < 100) {
+        //         $scope.myHeight += $scope.increments[nonEmptyIndex] * 100;
+        //     }
+        // };
 
         const obtainPercentages = function () {
             let sum = 0;
             let result = [];
-            $scope.data.forEach(item => {
+            $scope.increments = [];
+            $scope.cleanData.forEach(item => {
                 sum += parseInt(item, 10);
             });
-            $scope.data.forEach(item => {
+            $scope.cleanData.forEach(item => {
                 let value = item * 100 / sum;
                 result.push(value);
-                $scope.increments.push(1 / item);
+                $scope.increments.push(value / item);
             });
+            console.log('$scope.increments', $scope.increments);
             return result;
         };
 
         $scope.startTimer = function () {
+            $scope.remaining = $scope.cleanData[nonEmptyIndex];
             if (!$scope.isDragging) {
                 $scope.isRunning = true;
                 $scope.isPaused = false;
@@ -104,8 +147,10 @@ angular.module('session.controllers')
                     timer = setInterval(function () {
                         if (angular.isDefined($scope.cleanData[nonEmptyIndex]) && $scope.cleanData[nonEmptyIndex] > 0) {
                             $scope.cleanData[nonEmptyIndex]--;
-                            $scope.percentages = obtainPercentages();
-                            $scope.myHeight += $scope.increments[nonEmptyIndex] * 100;
+                            $scope.remaining = $scope.cleanData[nonEmptyIndex];
+                            // $scope.percentages = obtainPercentages();
+                            //$scope.myHeight += $scope.increments[nonEmptyIndex] * 100;
+                            $scope.movingTop += $scope.increments[nonEmptyIndex];
                             $scope.updateStyle();
                             $scope.$apply();
                         } else {

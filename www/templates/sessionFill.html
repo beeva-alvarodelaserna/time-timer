@@ -1,10 +1,29 @@
 <ion-view ng-init="init()" view-title="Sesión {{sessionType === '0' ? 'simple' : 'multi parte'}}">
     <ion-content class="container">
-        <div class="time-progress red-background" on-drag-up="onDragUp()" on-drag-down="onDragDown()">
-            <div class="row" ng-style="myStyle" ng-repeat="session in cleanData">
+        <!--<div class="box">-->
+        <!--<div class="stay-in-place">-->
+        <!--<h1>hello world</h1>-->
+        <!--<p>ipsum dolorum caveat emptor veni vidi vici</p>-->
+        <!--</div>-->
+
+        <!--<div class="move-in-to-place">-->
+        <!--<h2>I'm on top</h2>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="time-progress red-background" on-drag-up="onDragUp()" on-drag-down="onDragDown()">-->
+        <!--<div class="row" ng-style="myStyle" ng-repeat="session in cleanData">-->
+        <!--<span class="text-center" style="width: 100%; font-weight: bold; font-size: large">{{session}}</span>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="stay-in-place">
+            <div class="row" ng-style="box[$index]" ng-repeat="session in cleanData track by $index">
                 <span class="text-center" style="width: 100%; font-weight: bold; font-size: large">{{session}}</span>
             </div>
+            <div ng-style="moveInToPlace">
+            </div>
         </div>
+        <span class="text-center" style="width: 100%;height: 5%; font-weight: bold; font-size: large">Remaining time: {{remaining}}</span>
         <div class="row buttons-container">
             <button ng-if="isRunning && !isPaused"
                     ng-click="pauseOrResumeTimer()"
