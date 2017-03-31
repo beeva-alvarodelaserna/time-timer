@@ -34,13 +34,15 @@
 
         <div class="row" ng-if="!isMultiple">
             <div class="col">
-                <div class="row" style="background-color: whitesmoke; text-align: center">
-                    <span style="width: 100%; text-align: center">{{data[0]}}</span>
-                </div>
-                <div class="row text-center item range range-positive">
-                    <span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">0</span>
-                    <input type="range" name="duration" min="0" max="60" ng-model="data[0]" ng-change="drag(data[0])">
-                    <span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">60</span>
+                <!--<div class="row" style="background-color: whitesmoke; text-align: center">-->
+                    <!--<span style="width: 100%; text-align: center">{{data[0]}}</span>-->
+                <!--</div>-->
+                <div class="row text-center item range">
+                    <!--<span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">0</span>-->
+                    <rzslider rz-slider-model="data[0]"
+                              rz-slider-options="slider.options"></rzslider>
+                    <!--<input type="range" name="duration" min="0" max="60" ng-model="data[0]" ng-change="drag(data[0])">-->
+                    <!--<span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">60</span>-->
                 </div>
             </div>
         </div>

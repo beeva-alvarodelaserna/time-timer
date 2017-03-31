@@ -13,10 +13,25 @@ angular.module('session.controllers', ['chart.js'])
             'background-color': '#ff9f8f'
         };
 
+        $scope.slider = {
+            options: {
+                floor: 0,
+                ceil: 60,
+                step: 5,
+                showTicks: true,
+                showTicksValues: false,
+                translate: function (value) {
+                    let marker = '<div class="pin">' + value + '</div>';
+                    return marker;
+                },
+                onChange: function(sliderId, modelValue) {
+                    $scope.drag(modelValue);
+                }
+            }
+        };
+
         $scope.sessionType = $stateParams.sessionId;
         $scope.isPie = $stateParams.versionId !== '1';
-        console.log($stateParams);
-        console.log('isPie', $scope.isPie);
         $scope.isMultiple = $stateParams.sessionId !== '0';
         $scope.isRunning = false;
         $scope.isPaused = false;
