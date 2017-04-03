@@ -1,64 +1,98 @@
 <ion-view view-title="Sesión {{sessionType === '0' ? 'simple' : 'multi parte'}}" ng-init="init()">
     <ion-content class="container">
-        <div class="white">
-            <div class="row" ng-if="!isMultiple">
-                <div class="col">
-                    <!--<div class="row" style="background-color: whitesmoke; text-align: center">-->
-                    <!--<span style="width: 100%; text-align: center">{{data[0]}}</span>-->
-                    <!--</div>-->
-                    <div class="row text-center range">
-                        <!--<span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">0</span>-->
-                        <rzslider rz-slider-model="sliderData[0]"
-                                  rz-slider-options="slider.options"></rzslider>
-                        <!--<input type="range" name="duration" min="0" max="60" ng-model="data[0]" ng-change="drag(data[0])">-->
-                        <!--<span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">60</span>-->
+        <div class="row" ng-if="isMultiple">
+            <div class="col">
+                <!--<div class="row" style="background-color: whitesmoke; text-align: center">-->
+                <!--<span style="width: 100%; text-align: center">{{data[0]}}</span>-->
+                <!--</div>-->
+                <div class="row text-center range">
+                    <div ng-click="incrementSteps()"
+                         class="round-button-container" style="margin: auto; width: 20%;">
+                        <div class="round-button-yellow">
+                            <a class="round-button-container"><i class="icon ion-android-add"
+                                                                 style="font-size: 35px;margin-top: -10%;"></i></a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div ng-if="isMultiple && !isRunning" style="width: 100%" class="text-center">
-            <div class="row text-center">
-                <div class="text-center">
-                    Número de partes
-                </div>
-            </div>
+        <div class="white" ng-if="!isMultiple">
             <div class="row">
                 <div class="col">
-                    <i style="display: inline-block; font-size: x-large" class="icon ion-minus-circled"
-                       ng-click="decrementSteps()"></i>
-                </div>
-                <div class="col">
-                    <span style="display: inline-block; text-align: center">{{numberOfSteps}}</span>
-                </div>
-                <div class="col">
-                    <i style="display: inline-block; font-size: x-large" class="icon ion-plus-circled"
-                       ng-click="incrementSteps()"></i>
+                    <div class="row text-center range">
+                        <rzslider rz-slider-model="sliderData[0]"
+                                  rz-slider-options="slider.options"></rzslider>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row"
+        <!--<div ng-if="isMultiple && !isRunning" style="width: 100%" class="text-center">-->
+        <!--<div class="row text-center">-->
+        <!--<div class="text-center">-->
+        <!--Número de partes-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="row">-->
+        <!--<div class="col">-->
+        <!--<i style="display: inline-block; font-size: x-large" class="icon ion-minus-circled"-->
+        <!--ng-click="decrementSteps()"></i>-->
+        <!--</div>-->
+        <!--<div class="col">-->
+        <!--<span style="display: inline-block; text-align: center">{{numberOfSteps}}</span>-->
+        <!--</div>-->
+        <!--<div class="col">-->
+        <!--<i style="display: inline-block; font-size: x-large" class="icon ion-plus-circled"-->
+        <!--ng-click="incrementSteps()"></i>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="row" ng-if="!isMultiple"
              style="background: url('../img/group.png') no-repeat center;padding-top: 20%;
              padding-bottom: 20%;">
             <div class="col">
-                <div class="text-center">
+                <div class="text-center" id="container">
                     <canvas id="pie" class="chart chart-pie"
                             chart-data="data" chart-labels="labels" chart-options="pieOptions">
                     </canvas>
+                    <div id="overlay"><span class="pie-info">{{data[0]}}</span></div>
                 </div>
             </div>
         </div>
 
-        <div class="row" ng-if="isMultiple" ng-hide="isRunning || isPaused">
-            <div class="col">
-                <div class="text-center item range range-positive"
-                     ng-repeat="i in range(numberOfSteps) track by $index">
-                    <input type="range" name="duration" min="0" max="60" ng-model="data[$index]"
-                           ng-change="dragIndex()">
-                    <span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">{{data[$index]}}</span>
+        <div ng-if="isMultiple" class="white">
+            <div class="row text-center range" ng-repeat="i in range(numberOfSteps) track by $index">
+                <rzslider rz-slider-id="{{$index}}" rz-slider-model="sliderData[$index]"
+                          rz-slider-options="sliderArray[$index].options"></rzslider>
+                <div class="round-button-container"
+                     style="margin: auto; padding: 3%;"
+                     ng-click="decrementSteps($index)">
+                    <div class="round-button-yellow">
+                        <a class="round-button-container"><i class="icon ion-android-delete" style="color: white"></i></a>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="row">
+
+        <div ng-if="isMultiple" class="row beeva-background" style="margin-top: 20px;">
+            <div class="col">
+                <div class="row">Pills</div>
+                <div class="row"><span class="pills-info">{{numberOfSteps}}</span></div>
+            </div>
+            <div class="col">
+                <div class="row">Time</div>
+                <div class="row"><span class="pills-info">{{totalTime}}'</span></div></div>
+            <div class="col">
+                <div class="round-button-container"
+                     style="margin: auto; padding: 3%; width: 70% !important;"
+                     ng-click="startTimer()">
+                    <div class="round-button">
+                        <a class="round-button-container">Go</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" ng-if="!isMultiple">
             <div ng-if="data[0] > 0 && !isRunning && !isPaused"
                  ng-click="startTimer()"
                  class="round-button-container" style="margin: auto;">
@@ -68,7 +102,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" ng-if="!isMultiple">
             <div class="col" ng-if="isRunning && !isPaused">
                 <div ng-click="pauseOrResumeTimer()"
                      class="round-button-container" style="margin: auto; width: 50% !important;">

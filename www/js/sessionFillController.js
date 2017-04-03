@@ -8,6 +8,8 @@ angular.module('session.controllers')
 
         $scope.sessionType = $stateParams.sessionId;
         $scope.isMultiple = $stateParams.sessionId !== '0';
+        $scope.loaded = false;
+        $scope.partFinished = false;
         $scope.isRunning = false;
         $scope.isPaused = false;
         $scope.isDragging = false;
@@ -51,6 +53,7 @@ angular.module('session.controllers')
         $scope.init = function () {
             $scope.data = $stateParams.duration.split(',');
             parseData();
+            $scope.loaded = true;
             if (!$scope.isRunning) {
                 $scope.startTimer();
             }
@@ -58,7 +61,7 @@ angular.module('session.controllers')
 
         const parseData = function () {
             $scope.cleanData = [];
-            for (let i = 0; i < $scope.data.length - 1; i++) {
+            for (let i = 0; i < $scope.data.length; i++) {
                 $scope.cleanData.push($scope.data[i]);
             }
             $scope.percentages = obtainPercentages();
@@ -125,12 +128,12 @@ angular.module('session.controllers')
                 result.push(value);
                 $scope.increments.push(value / item);
             });
-            console.log('$scope.increments', $scope.increments);
             return result;
         };
 
         $scope.startTimer = function () {
             $scope.remaining = $scope.cleanData[nonEmptyIndex];
+            $scope.partFinished = false;
             if (!$scope.isDragging) {
                 $scope.isRunning = true;
                 $scope.isPaused = false;
@@ -141,20 +144,24 @@ angular.module('session.controllers')
                         $scope.startTimer();
                     } else {
                         $scope.stopTimer();
-                        $scope.finishSessionAndGoToSurvey();
+                        $scope.finishSession();
                     }
                 } else {
                     timer = setInterval(function () {
                         if (angular.isDefined($scope.cleanData[nonEmptyIndex]) && $scope.cleanData[nonEmptyIndex] > 0) {
                             $scope.cleanData[nonEmptyIndex]--;
                             $scope.remaining = $scope.cleanData[nonEmptyIndex];
-                            // $scope.percentages = obtainPercentages();
-                            //$scope.myHeight += $scope.increments[nonEmptyIndex] * 100;
                             $scope.movingTop += $scope.increments[nonEmptyIndex];
                             $scope.updateStyle();
                             $scope.$apply();
                         } else {
-                            $scope.startTimer();
+                            if (nonEmptyIndex < $scope.cleanData.length - 1) {
+                                $scope.partFinished = true;
+                                $scope.pauseOrResumeTimer();
+                                $scope.$apply();
+                            } else {
+                                $scope.startTimer();
+                            }
                         }
                     }, 1000);
                 }
@@ -163,13 +170,7 @@ angular.module('session.controllers')
             }
         };
 
-        $scope.finishSessionAndGoToSurvey = function () {
-            // $ionicPopup.alert({
-            //     title: 'Se acabó',
-            //     content: '¡Reunión finalizada!'
-            // }).then(function () {
-            //     $state.go('app.survey');
-            // });
+        $scope.finishSession = function () {
             $state.go('app.finished');
         };
 
@@ -196,7 +197,7 @@ angular.module('session.controllers')
             $scope.stopTimer();
         };
 
-        $rootScope.$ionicGoBack = function() {
+        $rootScope.$ionicGoBack = function () {
             $scope.goBack();
         };
     });

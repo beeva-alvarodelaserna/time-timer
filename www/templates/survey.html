@@ -1,18 +1,29 @@
 <ion-view view-title="Survey">
     <ion-content class="container">
-        <h1>¿Ha sido una reunión productiva?</h1>
-        <button ng-click="goToFinalView(0)"
-                class="button button-block button-balanced">
-            Sí
-        </button>
-        <button ng-click="goToFinalView(1)"
-                class="button button-block button-energized">
-            Meh
-        </button>
-        <button ng-click="goToFinalView(2)"
-                class="button button-block button-assertive">
-            No
-        </button>
+        <div class="row text-center">
+            <h2>¿Ha sido una reunión productiva?</h2>
+        </div>
+        <div ng-click="goToFinalView(0)"
+             class="row round-button-container" style="margin: auto;">
+            <div class="round-button-yellow">
+                <a class="round-button-container" style="padding-top: 18%;"><i class="icon ion-happy-outline"
+                                                                               style="font-size: 80px;"></i></a>
+            </div>
+        </div>
+        <div ng-click="goToFinalView(1)"
+             class="row round-button-container" style="margin: auto;">
+            <div class="round-button-yellow">
+                <a class="round-button-container" style="padding-top: 18%;"><i class="icon ion-android-happy"
+                                                                               style="font-size: 80px;"></i></a>
+            </div>
+        </div>
+        <div ng-click="goToFinalView(2)"
+             class="row round-button-container" style="margin: auto;">
+            <div class="round-button-yellow">
+                <a class="round-button-container" style="padding-top: 18%;"><i class="icon ion-sad-outline"
+                                                                               style="font-size: 80px;"></i></a>
+            </div>
+        </div>
 
     </ion-content>
 </ion-view>

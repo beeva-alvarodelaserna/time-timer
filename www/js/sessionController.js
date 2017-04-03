@@ -18,18 +18,52 @@ angular.module('session.controllers', ['chart.js'])
         $scope.isRunning = false;
         $scope.isPaused = false;
         $scope.numberOfSteps = 2;
+        $scope.totalTime = 0;
         $scope.data;
         $scope.sliderData;
         $scope.labels;
         $scope.slider;
         $scope.pieOptions = {
             tooltipEvents: [],
-            showTooltips: true,
+            // showTooltips: true,
             tooltipCaretSize: 0,
             onAnimationComplete: function () {
-                this.showTooltip(this.segments, true);
+                //this.showTooltip(this.segments, true);
             }
         };
+
+        $scope.slider = {
+            options: {
+                floor: 0,
+                ceil: 60,
+                step: 5,
+                showTicks: true,
+                showTicksValues: false,
+                translate: function (value) {
+                    let marker;
+                    if (value !== 0 && value !== 60) {
+                        marker = '<div class="pin"><span>' + value + '</span></div>';
+                    } else {
+                        marker = value;
+                    }
+                    return marker;
+                },
+                onChange: function(sliderId, modelValue) {
+                    $scope.data[nonEmptyIndex] = modelValue;
+                    $scope.drag(modelValue);
+                    $scope.obtainTotalTime();
+                }
+            }
+        };
+
+        $scope.obtainTotalTime = function () {
+            $scope.totalTime = 0;
+            for (let i = 0; i < $scope.sliderData.length - 1; i++) {
+                $scope.totalTime += $scope.sliderData[i];
+            }
+        };
+
+        $scope.sliderArray = [];
 
         $scope.init = function () {
             nonEmptyIndex = 0;
@@ -43,29 +77,12 @@ angular.module('session.controllers', ['chart.js'])
                 $scope.drag($stateParams.duration);
             }
             $scope.generateLabels();
-
-            $scope.slider = {
-                options: {
-                    floor: 0,
-                    ceil: 60,
-                    step: 5,
-                    showTicks: true,
-                    showTicksValues: false,
-                    translate: function (value) {
-                        let marker;
-                        if (value !== 0 && value !== 60) {
-                            marker = '<div class="pin"><span>' + value + '</span></div>';
-                        } else {
-                            marker = value;
-                        }
-                        return marker;
-                    },
-                    onChange: function(sliderId, modelValue) {
-                        $scope.data[nonEmptyIndex] = modelValue;
-                        $scope.drag(modelValue);
-                    }
-                }
-            };
+            for (let i = 0; i < $scope.numberOfSteps; i++) {
+                let slider = {};
+                angular.copy($scope.slider, slider);
+                slider.options.id = i;
+                $scope.sliderArray.push(slider);
+            }
         };
 
         $scope.range = function (count) {
@@ -75,18 +92,29 @@ angular.module('session.controllers', ['chart.js'])
         $scope.incrementSteps = function () {
             $scope.numberOfSteps++;
             $scope.data.splice($scope.data.length - 1, 0, 0);
+            $scope.sliderData.splice($scope.sliderData.length - 1, 0, 0);
             $scope.labels.push("");
+            let slider = {};
+            angular.copy($scope.slider, slider);
+            slider.options.id = $scope.numberOfSteps - 1;
+            $scope.sliderArray.push(slider);
         };
 
-        $scope.decrementSteps = function () {
+        $scope.decrementSteps = function (index) {
             $scope.numberOfSteps--;
             if ($scope.numberOfSteps < 2) {
                 $scope.numberOfSteps = 2;
             }
             if ($scope.data.length > 2) {
-                $scope.data.splice($scope.data.length - 2, 1);
+                $scope.sliderData.splice(index, 1);
+                $scope.sliderArray.splice(index, 1);
+                $scope.data.splice(index, 1);
                 $scope.labels.pop();
             }
+            for (let i = 0; i < $scope.sliderArray.length; i++) {
+                $scope.sliderArray[i].options.id = i;
+            }
+            $scope.obtainTotalTime();
         };
 
         $scope.drag = function (newValue) {
@@ -118,20 +146,14 @@ angular.module('session.controllers', ['chart.js'])
             if ($scope.isPie) {
                 $scope.isRunning = true;
                 $scope.isPaused = false;
-                console.log('dale');
-                console.log('$scope.data[nonEmptyIndex]', $scope.data[nonEmptyIndex]);
                 if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] == 0) {
                     nonEmptyIndex++;
-                    console.log('nonEmptyIndex', nonEmptyIndex);
-                    console.log('$scope.data[nonEmptyIndex]', $scope.data[nonEmptyIndex]);
                     if (nonEmptyIndex < $scope.data.length - 1) {
-                        console.log('stop and start');
                         $scope.stopTimer();
                         $scope.startTimer();
                     } else {
-                        console.log('stop and finish');
                         $scope.stopTimer();
-                        $scope.finishSessionAndGoToSurvey();
+                        $scope.finishSession();
                     }
                 } else {
                     timer = setInterval(function () {
@@ -140,13 +162,9 @@ angular.module('session.controllers', ['chart.js'])
                             if ($scope.data[nonEmptyIndex] % 5 == 0) {
                                 $scope.sliderData[nonEmptyIndex] = $scope.data[nonEmptyIndex];
                             }
-                            console.log('nonEmptyIndex', nonEmptyIndex);
-                            console.log('$scope.data[nonEmptyIndex]', $scope.data[nonEmptyIndex]);
                             if (nonEmptyIndex == 0) {
-                                console.log('drag');
                                 $scope.drag($scope.data[nonEmptyIndex]);
                             } else {
-                                console.log('dragIndex');
                                 $scope.dragIndex(nonEmptyIndex, $scope.data[nonEmptyIndex]);
                             }
                             $scope.$apply();
@@ -156,11 +174,12 @@ angular.module('session.controllers', ['chart.js'])
                     }, 1000);
                 }
             } else {
-                $state.go('app.sessionFill', {sessionId: $stateParams.sessionId, versionId: $stateParams.versionId, duration: $scope.data.join(',')});
+                $scope.sliderData.pop();
+                $state.go('app.sessionFill', {sessionId: $stateParams.sessionId, versionId: $stateParams.versionId, duration: $scope.sliderData.join(',')});
             }
         };
 
-        $scope.finishSessionAndGoToSurvey = function () {
+        $scope.finishSession = function () {
             // $ionicPopup.alert({
             //     title: 'Se acabó',
             //     content: '¡Reunión finalizada!'

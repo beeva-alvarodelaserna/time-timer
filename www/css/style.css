@@ -147,3 +147,23 @@
     padding: 10%;
     margin: auto;
 }
+
+.pills-info {
+    font-size: 40px;
+    margin-top: 10px;
+}
+
+#time-container {
+    position: relative;
+}
+#time-container canvas, #overlay {
+    position: absolute;
+    top: 39%;
+    left: 47%;
+}
+.pie-info {
+    background-color: white;
+    font-size: 20px;
+    width: 100px !important;
+    height: 30px;
+}

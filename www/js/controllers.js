@@ -12,6 +12,10 @@ angular.module('starter.controllers', [])
         ];
 
         $scope.showVersions = function (sessionId) {
-            $state.go('app.selectTypeForSession', {sessionType: sessionId});
+            if (sessionId == 1) {
+                $state.go('app.session', {sessionId: 1, versionId: 1});
+            } else {
+                $state.go('app.selectTypeForSession', {sessionType: sessionId});
+            }
         };
     });
