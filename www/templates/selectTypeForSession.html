@@ -10,9 +10,9 @@
 
         <div class="row" style="position:relative;left: 35%; text-align: center;margin-bottom: 10px;" ng-repeat="version in versionTypes[sessionType]"
              ng-click="goToVersion(version.id)">
-            <div class="round-button">
-                <div class="round-button-circle">
-                    <a class="round-button">{{version.id + 1}}</a>
+            <div class="round-button-container">
+                <div class="round-button-yellow">
+                    <a class="round-button-container">{{version.id + 1}}</a>
                 </div>
             </div>
         </div>

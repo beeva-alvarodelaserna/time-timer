@@ -1,17 +1,34 @@
 <ion-view view-title="Home">
-    <ion-content class="container">
-        <div class="row" style="margin-top: 20%">
+    <ion-content>
+        <div class="container" style="height: 50% !important">
             <div class="col">
-                <div class="text-center">
+                <div class="text-center" style="margin-top: 10%;">
                     <img src="../img/page1.png">
                     <h4 style="color: gray;">Really efficient meetings</h4>
                 </div>
             </div>
         </div>
-        <div class="row" style="position: static; margin-top: 50px; width: 100%" ng-click="goToSelectSession()">
-            <div class="round-button" style="text-align: center; margin-left: 40%">
-                <div class="round-button-circle">
-                    <a class="round-button">GO</a>
+        <!--<div class="row" style="position: static; margin-top: 50px; width: 100%; height: 50%;" ng-click="goToSelectSession()">-->
+        <!--<div class="round-button-container" style="text-align: center; margin-left: 40%">-->
+        <!--<div class="round-button-yellow">-->
+        <!--<a class="round-button-container">GO</a>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <div class="beeva-background" style="height: 50% !important">
+            <div class="row">
+                <div class="text-center" style="width:100%">
+                    <span style="color: gray">Select the session type</span>
+                </div>
+            </div>
+            <div class="row" style="text-align: center;margin: auto;top: 25%;position: relative;">
+                <div class="col" ng-repeat="session in sessions"
+                     ng-click="showVersions(session.id)">
+                    <div class="round-button-container" style="margin: auto; width: 50% !important;">
+                        <div class="round-button">
+                            <a class="round-button-container">{{session.title}}</a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

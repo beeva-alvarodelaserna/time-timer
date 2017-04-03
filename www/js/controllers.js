@@ -6,4 +6,12 @@ angular.module('starter.controllers', [])
         $scope.goToSelectSession = function () {
             $state.go('app.selectSession');
         };
+        $scope.sessions = [
+            {title: 'One pill', id: 0},
+            {title: 'Multiple pills', id: 1}
+        ];
+
+        $scope.showVersions = function (sessionId) {
+            $state.go('app.selectTypeForSession', {sessionType: sessionId});
+        };
     });

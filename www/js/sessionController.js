@@ -12,24 +12,6 @@ angular.module('session.controllers', ['chart.js'])
             'height': $scope.myHeight,
             'background-color': '#ff9f8f'
         };
-
-        $scope.slider = {
-            options: {
-                floor: 0,
-                ceil: 60,
-                step: 5,
-                showTicks: true,
-                showTicksValues: false,
-                translate: function (value) {
-                    let marker = '<div class="pin">' + value + '</div>';
-                    return marker;
-                },
-                onChange: function(sliderId, modelValue) {
-                    $scope.drag(modelValue);
-                }
-            }
-        };
-
         $scope.sessionType = $stateParams.sessionId;
         $scope.isPie = $stateParams.versionId !== '1';
         $scope.isMultiple = $stateParams.sessionId !== '0';
@@ -37,7 +19,9 @@ angular.module('session.controllers', ['chart.js'])
         $scope.isPaused = false;
         $scope.numberOfSteps = 2;
         $scope.data;
+        $scope.sliderData;
         $scope.labels;
+        $scope.slider;
         $scope.pieOptions = {
             tooltipEvents: [],
             showTooltips: true,
@@ -48,6 +32,7 @@ angular.module('session.controllers', ['chart.js'])
         };
 
         $scope.init = function () {
+            nonEmptyIndex = 0;
             if ($scope.isMultiple) {
                 $scope.data = [0, 0, maxTime];
             } else {
@@ -58,6 +43,29 @@ angular.module('session.controllers', ['chart.js'])
                 $scope.drag($stateParams.duration);
             }
             $scope.generateLabels();
+
+            $scope.slider = {
+                options: {
+                    floor: 0,
+                    ceil: 60,
+                    step: 5,
+                    showTicks: true,
+                    showTicksValues: false,
+                    translate: function (value) {
+                        let marker;
+                        if (value !== 0 && value !== 60) {
+                            marker = '<div class="pin"><span>' + value + '</span></div>';
+                        } else {
+                            marker = value;
+                        }
+                        return marker;
+                    },
+                    onChange: function(sliderId, modelValue) {
+                        $scope.data[nonEmptyIndex] = modelValue;
+                        $scope.drag(modelValue);
+                    }
+                }
+            };
         };
 
         $scope.range = function (count) {
@@ -99,19 +107,29 @@ angular.module('session.controllers', ['chart.js'])
 
         $scope.generateLabels = function () {
             $scope.labels = [];
-            $scope.data.forEach(element => $scope.labels.push(""))
+            $scope.sliderData = [];
+            $scope.data.forEach(element => {
+                $scope.labels.push("");
+                $scope.sliderData.push(element);
+            })
         };
 
         $scope.startTimer = function () {
             if ($scope.isPie) {
                 $scope.isRunning = true;
                 $scope.isPaused = false;
+                console.log('dale');
+                console.log('$scope.data[nonEmptyIndex]', $scope.data[nonEmptyIndex]);
                 if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] == 0) {
                     nonEmptyIndex++;
+                    console.log('nonEmptyIndex', nonEmptyIndex);
+                    console.log('$scope.data[nonEmptyIndex]', $scope.data[nonEmptyIndex]);
                     if (nonEmptyIndex < $scope.data.length - 1) {
+                        console.log('stop and start');
                         $scope.stopTimer();
                         $scope.startTimer();
                     } else {
+                        console.log('stop and finish');
                         $scope.stopTimer();
                         $scope.finishSessionAndGoToSurvey();
                     }
@@ -119,9 +137,16 @@ angular.module('session.controllers', ['chart.js'])
                     timer = setInterval(function () {
                         if (angular.isDefined($scope.data[nonEmptyIndex]) && $scope.data[nonEmptyIndex] > 0) {
                             $scope.data[nonEmptyIndex]--;
+                            if ($scope.data[nonEmptyIndex] % 5 == 0) {
+                                $scope.sliderData[nonEmptyIndex] = $scope.data[nonEmptyIndex];
+                            }
+                            console.log('nonEmptyIndex', nonEmptyIndex);
+                            console.log('$scope.data[nonEmptyIndex]', $scope.data[nonEmptyIndex]);
                             if (nonEmptyIndex == 0) {
+                                console.log('drag');
                                 $scope.drag($scope.data[nonEmptyIndex]);
                             } else {
+                                console.log('dragIndex');
                                 $scope.dragIndex(nonEmptyIndex, $scope.data[nonEmptyIndex]);
                             }
                             $scope.$apply();

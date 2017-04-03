@@ -4,6 +4,9 @@
     background-color: #ebebeb;
     height: 100%;
 }
+.white {
+    background-color: white !important;
+}
 
 .time-progress {
     height: 80%;
@@ -20,11 +23,21 @@
     position: relative;
 }
 
-.round-button {
+.round-button-container {
     width: 25%;
 }
 
-.round-button-circle {
+.round-button {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: white;
+    box-shadow: 0 0 3px gray;
+}
+
+.round-button-yellow {
     width: 100%;
     height: 0;
     padding-bottom: 100%;
@@ -34,11 +47,17 @@
     box-shadow: 0 0 3px gray;
 }
 
-.round-button-circle:hover {
-    background: #ffd71f;
+.round-button-grey {
+    width: 100%;
+    height: 0;
+    padding-bottom: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    background: grey;
+    box-shadow: 0 0 3px gray;
 }
 
-.round-button a {
+.round-button-container a {
     display: block;
     float: left;
     width: 100%;
@@ -47,14 +66,13 @@
     line-height: 1em;
     margin-top: -0.5em;
     text-align: center;
-    color: grey;
+    color: darkgrey;
     font-family: Verdana;
     font-size: 1.2em;
-    font-weight: bold;
     text-decoration: none;
 }
 
-.red-background {
+.beeva-background {
     background-color: #ffd71f;
 }
 
@@ -115,11 +133,17 @@
     width: 30px;
     height: 30px;
     border-radius: 50% 50% 50% 0;
-    background: #c6a017;
+    background: #ffd71f;
     color: black;
     position: absolute;
     transform: rotate(-45deg);
     left: 50%;
     top: 50%;
-    margin: -20px 0 0 -20px;
+    margin: -35px 0 0 -15px;
+}
+.pin span {
+    position: relative !important;
+    transform: rotate(45deg);
+    padding: 10%;
+    margin: auto;
 }

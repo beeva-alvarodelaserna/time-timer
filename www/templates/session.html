@@ -1,5 +1,21 @@
 <ion-view view-title="Sesión {{sessionType === '0' ? 'simple' : 'multi parte'}}" ng-init="init()">
     <ion-content class="container">
+        <div class="white">
+            <div class="row" ng-if="!isMultiple">
+                <div class="col">
+                    <!--<div class="row" style="background-color: whitesmoke; text-align: center">-->
+                    <!--<span style="width: 100%; text-align: center">{{data[0]}}</span>-->
+                    <!--</div>-->
+                    <div class="row text-center range">
+                        <!--<span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">0</span>-->
+                        <rzslider rz-slider-model="sliderData[0]"
+                                  rz-slider-options="slider.options"></rzslider>
+                        <!--<input type="range" name="duration" min="0" max="60" ng-model="data[0]" ng-change="drag(data[0])">-->
+                        <!--<span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">60</span>-->
+                    </div>
+                </div>
+            </div>
+        </div>
         <div ng-if="isMultiple && !isRunning" style="width: 100%" class="text-center">
             <div class="row text-center">
                 <div class="text-center">
@@ -32,20 +48,6 @@
             </div>
         </div>
 
-        <div class="row" ng-if="!isMultiple">
-            <div class="col">
-                <!--<div class="row" style="background-color: whitesmoke; text-align: center">-->
-                    <!--<span style="width: 100%; text-align: center">{{data[0]}}</span>-->
-                <!--</div>-->
-                <div class="row text-center item range">
-                    <!--<span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">0</span>-->
-                    <rzslider rz-slider-model="data[0]"
-                              rz-slider-options="slider.options"></rzslider>
-                    <!--<input type="range" name="duration" min="0" max="60" ng-model="data[0]" ng-change="drag(data[0])">-->
-                    <!--<span style="display: inline-block;position: relative;top: 50%;transform: translateY(-50%);">60</span>-->
-                </div>
-            </div>
-        </div>
         <div class="row" ng-if="isMultiple" ng-hide="isRunning || isPaused">
             <div class="col">
                 <div class="text-center item range range-positive"
@@ -56,26 +58,57 @@
                 </div>
             </div>
         </div>
-        <button ng-if="data[0] > 0 && !isRunning && !isPaused"
-                ng-click="startTimer()"
-                class="button button-block button-positive"
-                style="background-color: #ffd71f; font-weight: bold">
-            Empezar
-        </button>
-        <button ng-if="isRunning && !isPaused"
-                ng-click="pauseOrResumeTimer()"
-                class="button button-block button-calm">
-            Pausar
-        </button>
-        <button ng-if="!isRunning && isPaused"
-                ng-click="pauseOrResumeTimer()"
-                class="button button-block button-balanced">
-            Continuar
-        </button>
-        <button ng-if="isRunning"
-                ng-click="stopTimer()"
-                class="button button-block button-assertive">
-            Parar
-        </button>
+        <div class="row">
+            <div ng-if="data[0] > 0 && !isRunning && !isPaused"
+                 ng-click="startTimer()"
+                 class="round-button-container" style="margin: auto;">
+                <div class="round-button-yellow">
+                    <a class="round-button-container">Start</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col" ng-if="isRunning && !isPaused">
+                <div ng-click="pauseOrResumeTimer()"
+                     class="round-button-container" style="margin: auto; width: 50% !important;">
+                    <div class="round-button-yellow">
+                        <a class="round-button-container">Pause</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col" ng-if="!isRunning && isPaused">
+                <div ng-click="pauseOrResumeTimer()"
+                     class="round-button-container" style="margin: auto; width: 50% !important">
+                    <div class="round-button-yellow">
+                        <a class="round-button-container">Continue</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div ng-if="isRunning || isPaused"
+                     ng-click="stopTimer()"
+                     class="round-button-container" style="margin: auto; width: 50% !important">
+                    <div class="round-button-grey">
+                        <a class="round-button-container">Stop</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--<button ng-if="isRunning && !isPaused"-->
+        <!--ng-click="pauseOrResumeTimer()"-->
+        <!--class="button button-block button-calm">-->
+        <!--Pausar-->
+        <!--</button>-->
+        <!--<button ng-if="!isRunning && isPaused"-->
+        <!--ng-click="pauseOrResumeTimer()"-->
+        <!--class="button button-block button-balanced">-->
+        <!--Continuar-->
+        <!--</button>-->
+        <!--<button ng-if="isRunning"-->
+        <!--ng-click="stopTimer()"-->
+        <!--class="button button-block button-assertive">-->
+        <!--Parar-->
+        <!--</button>-->
     </ion-content>
 </ion-view>
