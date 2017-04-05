@@ -1,29 +1,30 @@
 <ion-view view-title="Survey">
     <ion-content class="container">
-        <div class="row text-center">
+        <div class="row text-center" style="height: 10%;">
             <h2>¿Ha sido una reunión productiva?</h2>
         </div>
-        <div ng-click="goToFinalView(0)"
-             class="row round-button-container" style="margin: auto;">
-            <div class="round-button-yellow">
-                <a class="round-button-container" style="padding-top: 18%;"><i class="icon ion-happy-outline"
-                                                                               style="font-size: 80px;"></i></a>
+        <div class="row" style="height: 90%;">
+            <div ng-click="goToFinalView(0)"
+                 class="row round-button-container" style="margin: auto;">
+                <div class="round-button-yellow" style="background: forestgreen;">
+                    <a class="round-button-container" style="padding-top: 18%;"><i class="icon ion-happy-outline"
+                                                                                   style="font-size: 80px;color: white;"></i></a>
+                </div>
+            </div>
+            <div ng-click="goToFinalView(1)"
+                 class="row round-button-container" style="margin: auto;">
+                <div class="round-button-yellow">
+                    <a class="round-button-container" style="padding-top: 18%;"><i class="icon ion-android-happy"
+                                                                                   style="font-size: 80px;color: white;"></i></a>
+                </div>
+            </div>
+            <div ng-click="goToFinalView(2)"
+                 class="row round-button-container" style="margin: auto;">
+                <div class="round-button-yellow" style="background: crimson;">
+                    <a class="round-button-container" style="padding-top: 18%;"><i class="icon ion-sad-outline"
+                                                                                   style="font-size: 80px;color: white;"></i></a>
+                </div>
             </div>
         </div>
-        <div ng-click="goToFinalView(1)"
-             class="row round-button-container" style="margin: auto;">
-            <div class="round-button-yellow">
-                <a class="round-button-container" style="padding-top: 18%;"><i class="icon ion-android-happy"
-                                                                               style="font-size: 80px;"></i></a>
-            </div>
-        </div>
-        <div ng-click="goToFinalView(2)"
-             class="row round-button-container" style="margin: auto;">
-            <div class="round-button-yellow">
-                <a class="round-button-container" style="padding-top: 18%;"><i class="icon ion-sad-outline"
-                                                                               style="font-size: 80px;"></i></a>
-            </div>
-        </div>
-
     </ion-content>
 </ion-view>

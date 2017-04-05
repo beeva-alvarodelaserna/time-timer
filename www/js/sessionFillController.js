@@ -73,7 +73,7 @@ angular.module('session.controllers')
                     'width': '100%',
                     'height': height + '%',
                     'overflow': 'hidden',
-                    'border': 'black solid 1px',
+                    'border-top': 'black solid 1px',
                     'background': '#ffd71f'
                 });
             });

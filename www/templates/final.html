@@ -1,13 +1,21 @@
 <ion-view view-title="Final" ng-init="parseResult()">
-  <ion-content class="container">
-    <h1 style="width: 100%; text-align: center">{{message}}</h1>
-    <button ng-click="goBack()"
-            class="button button-block button-balanced">
-      Tener otra reunión
-    </button>
-    <button ng-click="quit()"
-            class="button button-block button-energized">
-      Salir
-    </button>
-  </ion-content>
+    <ion-content class="container">
+        <div class="row text-center" style="height: 20%;">
+            <h1 style="width: 100%; text-align: center">{{message}}</h1>
+        </div>
+        <div class="row" style="height: 80%;">
+            <div ng-click="goBack()"
+                 class="row round-button-container" style="margin: auto; width: 35%;">
+                <div class="round-button-yellow" style="background: forestgreen;">
+                    <a class="round-button-container" style="padding-top: 50%; color: white">Tener otra reunión</a>
+                </div>
+            </div>
+            <div ng-click="quit()"
+                 class="row round-button-container" style="margin: auto; width: 35%;">
+                <div class="round-button-yellow">
+                    <a class="round-button-container" style="padding-top: 50%; color: black">Salir</a>
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>
